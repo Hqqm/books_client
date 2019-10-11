@@ -2,42 +2,38 @@ import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
 
-import { fetchBooks } from "./model/fetchBooks";
-import { $allBooks } from "./model/fetchBooks";
-
-import { Book } from "@ui/atoms/book";
+import { fetchBooks, $allBooks } from "./model/fetchBooks";
+import { Book } from "@features/books_board/molecules/book";
+import { Spiner } from "@ui/atoms/spiner";
 import { ConditionalList } from "@ui/molecules/conditional_list";
 
 export const ListOfBooks = () => {
-  const books = useStore($allBooks);
-
   React.useEffect(() => {
     fetchBooks("/books");
   }, []);
+
+  const books = useStore($allBooks);
 
   return (
     <ConditionalList
       list={books}
       renderExists={books => (
         <Ul>
-          {books.map(book => (
-            <Book key={book.id}>
-              <div>{book.author}</div>
-              <br />
-              <div>{book.name}</div>
-            </Book>
+          {books.map(({ id, author, name }) => (
+            <Book key={id} author={author} name={name} />
           ))}
         </Ul>
       )}
-      renderEmpty={() => <div>nothing</div>}
+      renderEmpty={() => <Spiner />}
     />
   );
 };
 
 export const Ul = styled.ul`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
-  width: 100%;
-  padding: 0px;
+  margin-top: 20px;
 `;

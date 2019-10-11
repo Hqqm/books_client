@@ -25,6 +25,7 @@ const Container = styled.div`
   display: grid;
   height: 100%;
   grid-template-rows: 50px auto;
+  grid-template-columns: 200px auto;
   grid-template-areas:
     "header header header header"
     "sidebar main main main";
@@ -32,7 +33,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   grid-area: header;
-  background: #ffdcdc;
+  background: #f8cccb;
 `;
 
 const Main = styled.div`
@@ -41,5 +42,5 @@ const Main = styled.div`
 
 const Sidebar = styled.div`
   grid-area: sidebar;
-  background: #e7efff;
+  background: #ccccff;
 `;
