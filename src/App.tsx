@@ -1,23 +1,25 @@
 import * as React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { hot } from "react-hot-loader";
 import { Normalize } from "styled-normalize";
 
 import { GlobalStyle } from "./lib/global_style";
+import { Login } from "./pages/login";
+import { BooksPage } from "./pages/booksPage";
 
-import { MainTemplate } from "@ui/templates/main_template";
-import { ListOfBooks } from "@features/books_board/ListOfBooks";
-import { Header } from "@features/books_board/Header";
-
-export const App: React.FC<{}> = hot(module)(() => {
+export const App = hot(module)(() => {
   return (
     <>
-      <Normalize />
       <GlobalStyle />
-      <MainTemplate
-        header={<Header />}
-        main={<ListOfBooks />}
-        sidebar={"sidebar"}
-      />
+      <Normalize />
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Link to="/auth">gogo</Link>} />
+          <Route path="/auth" component={Login} />
+          <Route exact path="/books" component={BooksPage} />
+          <Route path="/" render={() => <h2>ой 404</h2>} />
+        </Switch>
+      </Router>
     </>
   );
 });

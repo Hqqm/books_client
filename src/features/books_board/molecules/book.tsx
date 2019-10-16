@@ -6,19 +6,21 @@ import { Button } from "@ui/atoms/button";
 interface Props {
   author: string;
   name: string;
+  price: string;
 }
 
-export const Book: React.FC<Props> = ({ author, name }) => {
+export const Book: React.FC<Props> = ({ author, name, price }) => {
   return (
     <Container>
       <div>{author}</div>
       <div>{name}</div>
+      <div>цена:{price}</div>
       <Button>Оформить</Button>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.li`
   width: 150px;
   height: 200px;
   display: flex;
