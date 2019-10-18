@@ -7,10 +7,9 @@ import { Spiner } from "@ui/atoms/spiner";
 import { Book } from "@features/books_board/molecules/book";
 
 export const ListOfBooks = () => {
-  const url = "/api/books";
   React.useEffect(() => {
-    fetchBooks(url);
-  }, [url]);
+    fetchBooks("/api/books");
+  }, []);
 
   return (
     <>
@@ -36,7 +35,7 @@ export const Ul = styled.ul`
   display: grid;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   margin-top: 20px;
 `;

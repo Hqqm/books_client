@@ -4,9 +4,5 @@ import { Header } from "@features/books_board/Header";
 import { ListOfBooks } from "@features/books_board/ListOfBooks";
 
 export const BooksPage = () => (
-  <MainTemplate
-    header={<Header />}
-    main={<ListOfBooks />}
-    sidebar={"sidebar"}
-  />
+  <MainTemplate header={<Header />} main={<ListOfBooks />} />
 );

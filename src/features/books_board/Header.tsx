@@ -1,16 +1,20 @@
 import * as React from "react";
-
 import styled from "styled-components";
-import { $currentUser } from "@features/join/model/login";
+
 import { useStore } from "effector-react";
+import { loadSession, $session } from "@features/common/session";
 
 export const Header: React.FC<{}> = () => {
-  const currentUser = useStore($currentUser);
+  React.useEffect(() => {
+    loadSession();
+  }, []);
 
+  const currentUser = useStore($session);
   return (
     <Nav>
       <Ul>
-        <Item>hiii {currentUser.first_name + " " + currentUser.last_name}</Item>
+        <Item>current user:{JSON.stringify(currentUser)}</Item>
+
         <Item>Управление</Item>
         <Item>Выход</Item>
       </Ul>

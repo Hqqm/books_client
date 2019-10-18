@@ -46,6 +46,7 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "browser-cookies": "^1.2.0",
     "effector": "^20.3.0",
     "effector-react": "^20.4.0",
     "history": "^4.10.1",

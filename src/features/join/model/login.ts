@@ -1,21 +1,6 @@
 import * as React from "react";
 import { createEffect, createStore, createEvent, sample } from "effector";
-import { createBrowserHistory } from "history";
-export const history = createBrowserHistory();
-
-interface UserData {
-  email: string;
-  first_name: string;
-  last_name: string;
-  created_at: string;
-}
-
-const initialUserState: UserData = {
-  email: "",
-  first_name: "",
-  last_name: "",
-  created_at: ""
-};
+import { tokenChanged, $token } from "@features/common/token";
 
 interface FormData {
   email: string;
@@ -27,46 +12,43 @@ const initialState: FormData = {
   password: ""
 };
 
-export const sendForm = createEffect<FormData, UserData, Error>({
-  handler: async data => {
-    console.log(JSON.stringify(data));
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const json = await response.json();
-    console.log(json);
-    return json;
-  }
-});
-
 export const submitted = createEvent<React.FormEvent<HTMLFormElement>>();
+export const pageReady = createEvent();
 export const setField = createEvent();
-
-export const $form = createStore<FormData>(initialState)
-  .on(setField, (s, { key, value }: any) => ({
-    ...s,
-    [key]: value
-  }))
-  .reset(sendForm.done);
-
-submitted.watch(event => {
-  event.preventDefault();
-});
+export const createSession = createEffect<FormData, string | null, Error>();
+export const $form = createStore<FormData>(initialState);
 
 sample({
   source: $form,
   clock: submitted,
-  target: sendForm
+  target: createSession
 });
 
-export const $currentUser = createStore(initialUserState).on(
-  sendForm.done,
-  (s, { result }) => {
-    console.log(result);
-    return result;
-  }
-);
+createSession.use(async data => {
+  const response = await fetch("/api/auth", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  const token = response.headers.get("x-csrf-token");
+  return token;
+});
+
+$form
+  .on(setField, (s, { key, value }: any) => ({
+    ...s,
+    [key]: value
+  }))
+  .reset(createSession.done);
+
+const unsubcreateSession = createSession.done.watch(({ result }) => {
+  const token = result ? result : null;
+  tokenChanged(token);
+  unsubcreateSession();
+});
+
+submitted.watch(event => {
+  event.preventDefault();
+});
