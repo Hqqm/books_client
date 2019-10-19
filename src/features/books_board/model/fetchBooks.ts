@@ -1,14 +1,15 @@
 import { createStore, createEffect } from "effector";
-import { $token } from "@features/common/token";
+import { $token } from "@features/shared/token";
 
-interface Book {
+type Book = {
   id: number;
   author: string;
   name: string;
   price: string;
-}
+};
 
 export const fetchBooks = createEffect<string, Book[], Error>();
+
 export const $allBooks = createStore<Book[]>([]);
 
 $allBooks.on(fetchBooks.done, (_, { result }) => result);

@@ -13,6 +13,8 @@ const getResolve = env => ({
   alias: {
     "@ui": path.resolve(__dirname, "..", "src/ui"),
     "@features": path.resolve(__dirname, "..", "src/features"),
+    "@api": path.resolve(__dirname, "..", "src/api"),
+    "@lib": path.resolve(__dirname, "..", "src/lib"),
     ...enableHotLoader(env)
   },
   extensions: [".js", ".ts", ".tsx"],

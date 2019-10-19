@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { useStore } from "effector-react";
-import { loadSession, $session } from "@features/common/session";
+import { loadSession, $session } from "@features/shared/session";
 
 export const Header: React.FC<{}> = () => {
   React.useEffect(() => {
@@ -14,7 +14,6 @@ export const Header: React.FC<{}> = () => {
     <Nav>
       <Ul>
         <Item>current user:{JSON.stringify(currentUser)}</Item>
-
         <Item>Управление</Item>
         <Item>Выход</Item>
       </Ul>

@@ -1,5 +1,5 @@
 import { createEvent, createEffect, createStore } from "effector";
-import { UserData, getCurrentAccount } from "../../api/account";
+import { UserData, getCurrentAccount } from "@api/account"
 
 export const dropSession = createEvent();
 export const loadSession = createEffect<void, UserData, Error>();

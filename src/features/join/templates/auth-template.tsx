@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 
-interface Props {
+type Props = {
   form: React.ReactNode;
-}
+};
 
 export const AuthTemplate: React.FC<Props> = ({ form }) => (
   <Wrapper>{form && <FormContainer>{form}</FormContainer>}</Wrapper>

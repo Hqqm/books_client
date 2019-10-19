@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import { Button } from "@ui/atoms/button";
 
-interface Props {
+type Props = {
   author: string;
   name: string;
   price: string;
-}
+};
 
 export const Book: React.FC<Props> = ({ author, name, price }) => {
   return (

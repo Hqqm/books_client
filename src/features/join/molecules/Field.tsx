@@ -3,12 +3,12 @@ import { useStoreMap } from "effector-react";
 import { $form, setField } from "../model/login";
 import { Input } from "@ui/atoms";
 
-interface FieldProps {
+type FieldProps = {
   name: string;
   type: string;
   label: string;
   autoComplete: string;
-}
+};
 
 export const Field: React.FC<FieldProps> = ({
   name,

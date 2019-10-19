@@ -1,11 +1,11 @@
 import * as React from "react";
 import { createEffect, createStore, createEvent, sample } from "effector";
-import { tokenChanged, $token } from "@features/common/token";
+import { tokenChanged } from "@features/shared/token";
 
-interface FormData {
+type FormData = {
   email: string;
   password: string;
-}
+};
 
 const initialState: FormData = {
   email: "",
@@ -15,8 +15,17 @@ const initialState: FormData = {
 export const submitted = createEvent<React.FormEvent<HTMLFormElement>>();
 export const pageReady = createEvent();
 export const setField = createEvent();
+
 export const createSession = createEffect<FormData, string | null, Error>();
+
 export const $form = createStore<FormData>(initialState);
+
+$form
+  .on(setField, (s, { key, value }: any) => ({
+    ...s,
+    [key]: value
+  }))
+  .reset(createSession.done);
 
 sample({
   source: $form,
@@ -36,17 +45,9 @@ createSession.use(async data => {
   return token;
 });
 
-$form
-  .on(setField, (s, { key, value }: any) => ({
-    ...s,
-    [key]: value
-  }))
-  .reset(createSession.done);
-
-const unsubcreateSession = createSession.done.watch(({ result }) => {
+createSession.done.watch(({ result }) => {
   const token = result ? result : null;
   tokenChanged(token);
-  unsubcreateSession();
 });
 
 submitted.watch(event => {

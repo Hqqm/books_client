@@ -1,11 +1,11 @@
-import { $token } from "@features/common/token";
+import { $token } from "@features/shared/token";
 
-export interface UserData {
+export type UserData = {
   email: string;
   first_name: string;
   last_name: string;
   created_at: string;
-}
+};
 
 export const getCurrentAccount = async () => {
   const response = await fetch("/api/getCurrentAccount", {

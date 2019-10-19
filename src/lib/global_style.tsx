@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
   html, body {
+    font-family: 'Montserrat', sans-serif;
     height: 100%;
   }
   
