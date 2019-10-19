@@ -2,24 +2,27 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { useStore } from "effector-react";
-import { loadSession, $session } from "@features/shared/session";
+import { $session, $isAuthenticated } from "@features/shared/session";
+import { UserData } from "@api/account";
 
 export const Header: React.FC<{}> = () => {
-  React.useEffect(() => {
-    loadSession();
-  }, []);
-
   const currentUser = useStore($session);
+  const isAuthentication = useStore($isAuthenticated);
+
   return (
     <Nav>
       <Ul>
-        <Item>current user:{JSON.stringify(currentUser)}</Item>
+        <Item>isAuthentication : {isAuthentication ? "true" : "false"} </Item>
+        <Item>current user : {showUser(currentUser)}</Item>
         <Item>Управление</Item>
         <Item>Выход</Item>
       </Ul>
     </Nav>
   );
 };
+
+const showUser = (user: UserData | null) =>
+  user !== null ? user.last_name + " " + user.first_name : "guest";
 
 const Nav = styled.nav`
   display: flex;

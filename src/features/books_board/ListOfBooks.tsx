@@ -1,9 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useList, createComponent } from "effector-react";
+import { useList } from "effector-react";
 
 import { fetchBooks, $allBooks } from "./model/fetchBooks";
-import { Spiner } from "@ui/atoms/spiner";
 import { Book } from "@features/books_board/molecules/book";
 
 export const ListOfBooks = () => {
@@ -11,24 +10,14 @@ export const ListOfBooks = () => {
     fetchBooks("/api/books");
   }, []);
 
-  return (
-    <>
-      <Loading />
-      <Books />
-    </>
-  );
-};
+  const Books = () => {
+    const books = useList($allBooks, ({ author, name, price }) => (
+      <Book author={author} name={name} price={price} />
+    ));
+    return <Ul>{books}</Ul>;
+  };
 
-const Loading = createComponent(
-  fetchBooks.pending,
-  (_, pending) => pending && <Spiner />
-);
-
-const Books = () => {
-  const books = useList($allBooks, ({ author, name, price }) => (
-    <Book author={author} name={name} price={price} />
-  ));
-  return <Ul>{books}</Ul>;
+  return <Books />;
 };
 
 export const Ul = styled.ul`
