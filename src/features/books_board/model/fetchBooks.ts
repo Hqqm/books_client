@@ -1,4 +1,4 @@
-import { createStore, createEffect } from "effector";
+import { createStore, createEffect, createEvent } from "effector";
 import { $token } from "@features/shared/token";
 
 type Book = {
@@ -8,14 +8,15 @@ type Book = {
   price: string;
 };
 
-export const fetchBooks = createEffect<string, Book[], Error>();
+export const pageReady = createEvent();
+export const fetchBooks = createEffect<void, Book[], Error>();
 
 export const $allBooks = createStore<Book[]>([]);
 
 $allBooks.on(fetchBooks.done, (_, { result }) => result);
 
-fetchBooks.use(async url => {
-  const req = await fetch(url, {
+fetchBooks.use(async () => {
+  const req = await fetch("/api/books", {
     method: "GET",
     headers: {
       "x-csrf-token": $token.getState() || ""
@@ -24,6 +25,6 @@ fetchBooks.use(async url => {
   return req.json();
 });
 
-const unsubscribe = fetchBooks.watch(payload => {
-  unsubscribe();
+pageReady.watch(() => {
+  fetchBooks();
 });

@@ -5,7 +5,7 @@ import { useStore } from "effector-react";
 import { $session, $isAuthenticated } from "@features/shared/session";
 import { UserData } from "@api/account";
 
-export const Header: React.FC<{}> = () => {
+export const Header = () => {
   const currentUser = useStore($session);
   const isAuthentication = useStore($isAuthenticated);
 

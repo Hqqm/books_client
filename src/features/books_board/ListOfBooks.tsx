@@ -1,15 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useList } from "effector-react";
+import { useList, useStore } from "effector-react";
 
-import { fetchBooks, $allBooks } from "./model/fetchBooks";
+import { fetchBooks, $allBooks, pageReady } from "./model/fetchBooks";
 import { Book } from "@features/books_board/molecules/book";
 
 export const ListOfBooks = () => {
   React.useEffect(() => {
-    fetchBooks("/api/books");
+    pageReady();
   }, []);
 
+  const isLoading = useStore(fetchBooks.pending);
+  console.log(isLoading);
   const Books = () => {
     const books = useList($allBooks, ({ author, name, price }) => (
       <Book author={author} name={name} price={price} />

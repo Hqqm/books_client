@@ -1,11 +1,9 @@
 import * as React from "react";
 import { createEffect, createStore, createEvent, sample } from "effector";
+import { FormData, createSessionHandler } from "@api/session";
+import { history } from "@lib/history";
 import { tokenChanged } from "@features/shared/token";
-
-type FormData = {
-  email: string;
-  password: string;
-};
+import { $isAuthenticated } from "@features/shared/session";
 
 const initialState: FormData = {
   email: "",
@@ -33,21 +31,17 @@ sample({
   target: createSession
 });
 
-createSession.use(async data => {
-  const response = await fetch("/api/auth", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  });
-  const token = response.headers.get("x-csrf-token");
-  return token;
-});
-
+createSession.use(createSessionHandler);
 createSession.done.watch(({ result }) => {
   const token = result ? result : null;
   tokenChanged(token);
+  history.push("/books");
+});
+
+pageReady.watch(() => {
+  if ($isAuthenticated.getState()) {
+    history.push("/");
+  }
 });
 
 submitted.watch(event => {
