@@ -4,10 +4,13 @@ import styled from "styled-components";
 import { useStore } from "effector-react";
 import { $session, $isAuthenticated } from "@features/shared/session";
 import { UserData } from "@api/account";
+import { Button } from "@ui/atoms";
+import { logout } from "./model/fetchBooks";
 
 export const Header = () => {
   const currentUser = useStore($session);
   const isAuthentication = useStore($isAuthenticated);
+  console.log(currentUser);
 
   return (
     <Nav>
@@ -15,7 +18,9 @@ export const Header = () => {
         <Item>isAuthentication : {isAuthentication ? "true" : "false"} </Item>
         <Item>current user : {showUser(currentUser)}</Item>
         <Item>Управление</Item>
-        <Item>Выход</Item>
+        <Item>
+          <Button onClick={logout}>Выход</Button>{" "}
+        </Item>
       </Ul>
     </Nav>
   );

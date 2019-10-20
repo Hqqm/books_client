@@ -2,19 +2,25 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { submitted, pageReady } from "./model/login";
+import { submitted, formMounted, formUnmouted } from "./model/login";
 import { Button } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 import { Field } from "@features/join/molecules/Field";
 
 export const LoginForm = () => {
   React.useEffect(() => {
-    pageReady();
+    formMounted();
+    return formUnmouted();
   }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitted(e);
+  };
 
   return (
     <Form
-      handleSubmit={submitted}
+      onSubmit={handleSubmit}
       title="Login"
       link={<Link to="/books">go to books</Link>}
     >

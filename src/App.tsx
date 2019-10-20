@@ -6,7 +6,7 @@ import { Normalize } from "styled-normalize";
 import { GlobalStyle } from "./lib/global_style";
 import { AccountLoader } from "@features/shared/account-loader";
 import { history } from "@lib/history";
-import { Routes } from "@lib/routes";
+import { Routes } from "./routes";
 
 export const App = hot(module)(() => {
   return (

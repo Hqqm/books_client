@@ -6,17 +6,17 @@ interface FormProps {
   title: string;
   link?: React.ReactNode;
   children: React.ReactNode;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 export const Form: React.FC<FormProps> = ({
-  handleSubmit,
+  onSubmit,
   title,
   children,
   link
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmit}>
       <FormContainer>
         <Text color="#c9e2aa" size="3rem">
           {title}

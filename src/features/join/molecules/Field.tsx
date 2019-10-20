@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useStoreMap } from "effector-react";
-import { $form, setField } from "../model/login";
+import { $form, setFielded } from "../model/login";
 import { Input } from "@ui/atoms";
 
 type FieldProps = {
@@ -22,7 +22,7 @@ export const Field: React.FC<FieldProps> = ({
     fn: (values: any) => values[name] || ""
   });
 
-  const handleChange = setField.prepend(
+  const handleChange = setFielded.prepend(
     (e: React.FormEvent<HTMLInputElement>) => ({
       key: e.currentTarget.name,
       value: e.currentTarget.value

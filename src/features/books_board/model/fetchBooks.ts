@@ -1,5 +1,7 @@
 import { createStore, createEffect, createEvent } from "effector";
+import { history } from "@lib/history";
 import { $token } from "@features/shared/token";
+import { dropSession } from "@features/shared/session";
 
 type Book = {
   id: number;
@@ -8,7 +10,11 @@ type Book = {
   price: string;
 };
 
-export const pageReady = createEvent();
+export const logout = createEvent<
+  React.MouseEvent<HTMLButtonElement, MouseEvent>
+>();
+export const pageListOfBooksReady = createEvent();
+
 export const fetchBooks = createEffect<void, Book[], Error>();
 
 export const $allBooks = createStore<Book[]>([]);
@@ -22,9 +28,15 @@ fetchBooks.use(async () => {
       "x-csrf-token": $token.getState() || ""
     }
   });
-  return req.json();
+  const json = req.json();
+  return json;
 });
 
-pageReady.watch(() => {
+pageListOfBooksReady.watch(() => {
   fetchBooks();
+});
+
+logout.watch(() => {
+  dropSession();
+  history.replace("/");
 });

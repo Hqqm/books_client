@@ -3,27 +3,28 @@ import { createEffect, createStore, createEvent, sample } from "effector";
 import { FormData, createSessionHandler } from "@api/session";
 import { history } from "@lib/history";
 import { tokenChanged } from "@features/shared/token";
-import { $isAuthenticated } from "@features/shared/session";
+import { $isAuthenticated, loadSession } from "@features/shared/session";
 
 const initialState: FormData = {
   email: "",
   password: ""
 };
 
+export const formMounted = createEvent();
+export const formUnmouted = createEvent();
 export const submitted = createEvent<React.FormEvent<HTMLFormElement>>();
-export const pageReady = createEvent();
-export const setField = createEvent();
+export const setFielded = createEvent();
 
 export const createSession = createEffect<FormData, string | null, Error>();
 
 export const $form = createStore<FormData>(initialState);
 
 $form
-  .on(setField, (s, { key, value }: any) => ({
+  .on(setFielded, (s, { key, value }: any) => ({
     ...s,
     [key]: value
   }))
-  .reset(createSession.done);
+  .reset(formMounted, formUnmouted);
 
 sample({
   source: $form,
@@ -35,15 +36,12 @@ createSession.use(createSessionHandler);
 createSession.done.watch(({ result }) => {
   const token = result ? result : null;
   tokenChanged(token);
-  history.push("/books");
+  loadSession();
+  history.replace("/books");
 });
 
-pageReady.watch(() => {
+formMounted.watch(() => {
   if ($isAuthenticated.getState()) {
-    history.push("/");
+    history.replace("/");
   }
-});
-
-submitted.watch(event => {
-  event.preventDefault();
 });
