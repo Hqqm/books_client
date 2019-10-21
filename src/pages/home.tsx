@@ -5,6 +5,8 @@ export const HomePage = () => (
   <div>
     <Link to="/auth">go to auth</Link>
     <br />
+    <Link to="register">go to register</Link>
+    <br />
     <Link to="/books">go to books</Link>
   </div>
 );

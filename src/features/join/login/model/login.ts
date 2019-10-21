@@ -11,7 +11,7 @@ const initialState: FormData = {
 };
 
 export const formMounted = createEvent();
-export const formUnmouted = createEvent();
+export const formUnmounted = createEvent();
 export const submitted = createEvent<React.FormEvent<HTMLFormElement>>();
 export const setFielded = createEvent();
 
@@ -24,7 +24,7 @@ $form
     ...s,
     [key]: value
   }))
-  .reset(formMounted, formUnmouted);
+  .reset(formMounted, formUnmounted);
 
 sample({
   source: $form,

@@ -2,16 +2,18 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { submitted, formMounted, formUnmouted } from "./model/login";
+import { submitted, formMounted, formUnmounted } from "./model/login";
 import { Button } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
-import { Field } from "@features/join/molecules/Field";
+import { Field } from "@features/join/login/molecules/Field";
 
 export const LoginForm = () => {
   React.useEffect(() => {
     formMounted();
-    return formUnmouted();
-  }, []);
+    return () => {
+      formUnmounted();
+    };
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ export const LoginForm = () => {
     <Form
       onSubmit={handleSubmit}
       title="Login"
-      link={<Link to="/books">go to books</Link>}
+      link={<Link to="/register">go to register form</Link>}
     >
       <Field name="email" type="text" label="email" autoComplete="email" />
       <Field
