@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Button, Text } from "@ui/atoms";
 
 interface FormProps {
-  title: string;
+  title?: string;
   link?: React.ReactNode;
   children: React.ReactNode;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

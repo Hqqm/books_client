@@ -18,6 +18,7 @@ export const setFielded = createEvent();
 export const createSession = createEffect<FormData, string | null, Error>();
 
 export const $form = createStore<FormData>(initialState);
+export const $isFormDisabled = createSession.pending;
 
 $form
   .on(setFielded, (s, { key, value }: any) => ({

@@ -8,13 +8,15 @@ type FieldProps = {
   type: string;
   label: string;
   autoComplete: string;
+  disabled?: boolean;
 };
 
 export const Field: React.FC<FieldProps> = ({
   name,
   type,
   label,
-  autoComplete
+  autoComplete,
+  disabled
 }) => {
   const value = useStoreMap({
     store: $form,
@@ -37,6 +39,7 @@ export const Field: React.FC<FieldProps> = ({
       onChange={handleChange}
       label={label}
       autoComplete={autoComplete}
+      disabled={disabled}
     />
   );
 };

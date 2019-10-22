@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   type: string;
   autoComplete: string;
+  disabled?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -18,6 +19,7 @@ export const Input = ({
   type,
   placeholder,
   autoComplete,
+  disabled,
   onChange
 }: InputProps) => (
   <Container>
@@ -29,6 +31,7 @@ export const Input = ({
       type={type}
       placeholder={placeholder}
       autoComplete={autoComplete}
+      disabled={disabled}
     />
   </Container>
 );

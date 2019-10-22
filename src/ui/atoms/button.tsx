@@ -20,4 +20,13 @@ export const Button = styled.button<Props>`
       background: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
     }
   }
+
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:focus,
+  &:disabled:active {
+    background-color: #d2d8de;
+    border-color: #d2d8de;
+    color: #d2d8de;
+  }
 `;

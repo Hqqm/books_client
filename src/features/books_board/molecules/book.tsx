@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 import { Button } from "@ui/atoms/button";
 
-type Props = {
+export type BookProps = {
   author: string;
   name: string;
   price: string;
 };
 
-export const Book: React.FC<Props> = ({ author, name, price }) => {
+export const Book: React.FC<BookProps> = ({ author, name, price }) => {
   return (
     <Container>
       <div>{author}</div>
@@ -21,8 +21,8 @@ export const Book: React.FC<Props> = ({ author, name, price }) => {
 };
 
 const Container = styled.li`
-  width: 150px;
-  height: 200px;
+  width: 180px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

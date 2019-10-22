@@ -5,7 +5,7 @@ import { useStore } from "effector-react";
 import { $session, $isAuthenticated } from "@features/shared/session";
 import { UserData } from "@api/account";
 import { Button } from "@ui/atoms";
-import { logout } from "./model/fetchBooks";
+import { logout } from "./model/fetch-books";
 
 export const Header = () => {
   const currentUser = useStore($session);
