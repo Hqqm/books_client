@@ -2,12 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { Button } from "@ui/atoms/button";
-
-export type BookProps = {
-  author: string;
-  name: string;
-  price: string;
-};
+import { BookProps } from "@api/books";
 
 export const Book: React.FC<BookProps> = ({ author, name, price }) => {
   return (

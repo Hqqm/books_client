@@ -17,9 +17,9 @@ export const formSubmitted = createEvent<React.FormEvent<HTMLFormElement>>();
 
 export const registerUser = createEffect<RegisterUser, RegisterUser, Error>();
 
-export const $registerForm = createStore<RegisterUser>(initialState);
+export const $registerUserForm = createStore<RegisterUser>(initialState);
 
-$registerForm
+$registerUserForm
   .on(setFielded, (s, { key, value }: any) => ({
     ...s,
     [key]: value
@@ -27,7 +27,7 @@ $registerForm
   .reset(formMounted, formUnmounted);
 
 sample({
-  source: $registerForm,
+  source: $registerUserForm,
   clock: formSubmitted,
   target: registerUser
 });

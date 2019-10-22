@@ -1,11 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
-
 import { useStore } from "effector-react";
-import { $session, $isAuthenticated } from "@features/shared/session";
+
+import { history } from "@lib/history";
+import {
+  $session,
+  $isAuthenticated,
+  dropSession
+} from "@features/shared/session";
 import { UserData } from "@api/account";
 import { Button } from "@ui/atoms";
-import { logout } from "./model/fetch-books";
+
+import { createEvent } from "effector";
 
 export const Header = () => {
   const currentUser = useStore($session);
@@ -25,6 +31,13 @@ export const Header = () => {
     </Nav>
   );
 };
+
+const logout = createEvent<React.MouseEvent<HTMLButtonElement, MouseEvent>>();
+
+logout.watch(() => {
+  dropSession();
+  history.replace("/");
+});
 
 const showUser = (user: UserData | null) =>
   user !== null ? user.last_name + " " + user.first_name : "guest";

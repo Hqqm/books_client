@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useStoreMap } from "effector-react";
-import { $registerForm, setFielded } from "./model/register";
+import { $registerUserForm, setFielded } from "./model/register";
 import { Input } from "@ui/atoms";
 
 type FieldProps = {
@@ -17,7 +17,7 @@ export const Field: React.FC<FieldProps> = ({
   autoComplete
 }) => {
   const value = useStoreMap({
-    store: $registerForm,
+    store: $registerUserForm,
     keys: [name],
     fn: (values: any) => values[name] || ""
   });
