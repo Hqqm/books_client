@@ -12,10 +12,6 @@ export const ConditionalList = <T extends unknown>({
   renderEmpty
 }: ListProps<T>) => {
   return (
-    <>
-      {list && list.filter(Boolean).length > 0
-        ? renderExists(list)
-        : renderEmpty()}
-    </>
+    <>{list && list.filter(Boolean).length > 0 ? renderExists(list) : renderEmpty()}</>
   );
 };

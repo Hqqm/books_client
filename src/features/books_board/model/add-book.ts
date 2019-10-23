@@ -7,9 +7,7 @@ const initialState: BookProps = {
   price: ""
 };
 
-export const newBookFormSubmited = createEvent<
-  React.FormEvent<HTMLFormElement>
->();
+export const newBookFormSubmited = createEvent<React.FormEvent<HTMLFormElement>>();
 export const setFielded = createEvent();
 
 export const addBook = createEffect<BookProps, Book, Error>();

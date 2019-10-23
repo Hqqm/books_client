@@ -9,12 +9,7 @@ interface FormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const Form: React.FC<FormProps> = ({
-  onSubmit,
-  title,
-  children,
-  link
-}) => {
+export const Form: React.FC<FormProps> = ({ onSubmit, title, children, link }) => {
   return (
     <form onSubmit={onSubmit}>
       <FormContainer>

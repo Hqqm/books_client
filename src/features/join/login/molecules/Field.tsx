@@ -24,12 +24,10 @@ export const Field: React.FC<FieldProps> = ({
     fn: (values: any) => values[name] || ""
   });
 
-  const handleChange = setFielded.prepend(
-    (e: React.FormEvent<HTMLInputElement>) => ({
-      key: e.currentTarget.name,
-      value: e.currentTarget.value
-    })
-  );
+  const handleChange = setFielded.prepend((e: React.FormEvent<HTMLInputElement>) => ({
+    key: e.currentTarget.name,
+    value: e.currentTarget.value
+  }));
 
   return (
     <Input

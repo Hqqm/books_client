@@ -22,18 +22,8 @@ export const RegisterForm = () => {
       link={<Link to="/auth">go to login form</Link>}
     >
       <Field name="email" type="text" label="email" autoComplete="email" />
-      <Field
-        name="first_name"
-        type="text"
-        label="first name"
-        autoComplete="name"
-      />
-      <Field
-        name="last_name"
-        type="text"
-        label="last name"
-        autoComplete="name"
-      />
+      <Field name="first_name" type="text" label="first name" autoComplete="name" />
+      <Field name="last_name" type="text" label="last name" autoComplete="name" />
       <Field
         name="password"
         type="password"

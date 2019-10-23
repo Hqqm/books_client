@@ -2,12 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import {
-  submitted,
-  formMounted,
-  formUnmounted,
-  $isFormDisabled
-} from "./model/login";
+import { submitted, formMounted, formUnmounted, $isFormDisabled } from "./model/login";
 import { Button } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 import { Field } from "@features/join/login/molecules/Field";
