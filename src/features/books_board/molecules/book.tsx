@@ -2,14 +2,21 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { Button } from "@ui/atoms/button";
-import { BookProps } from "@api/books";
 
-export const Book: React.FC<BookProps> = ({ author, name, price }) => {
+type Props = {
+  author: string;
+  name: string;
+  price: string;
+  children: React.ReactNode;
+};
+
+export const Book: React.FC<Props> = ({ author, name, price, children }) => {
   return (
     <Container>
       <div>{author}</div>
       <div>{name}</div>
       <div>цена:{price}</div>
+      <div>{children}</div>
       <Button>Оформить</Button>
     </Container>
   );

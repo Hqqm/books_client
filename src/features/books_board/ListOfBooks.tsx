@@ -6,14 +6,17 @@ import { $allBooks } from "./model/books";
 import { pageListOfBooksReady } from "./model/fetch-books";
 import { Book } from "@features/books_board/molecules/book";
 import { NewBook } from "./molecules/new-book";
+import { removeBook } from "./model/delete-book";
 
 export const ListOfBooks = () => {
   React.useEffect(() => {
     pageListOfBooksReady();
   }, []);
 
-  const books = useList($allBooks, ({ author, name, price }) => (
-    <Book author={author} name={name} price={price} />
+  const books = useList($allBooks, ({ author, name, price, id }) => (
+    <Book author={author} name={name} price={price}>
+      <button onClick={() => removeBook(id)}>remove book</button>
+    </Book>
   ));
 
   return (
