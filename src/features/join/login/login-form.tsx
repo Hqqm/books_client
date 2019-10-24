@@ -1,53 +1,74 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-import { submitted, formMounted, formUnmounted, $isFormDisabled } from "./model/login";
-import { Button } from "@ui/atoms";
-import { Form } from "@ui/molecules/form";
-import { Field } from "@features/join/login/molecules/Field";
 import { useStore } from "effector-react";
 
-export const LoginForm = () => {
-  React.useEffect(() => {
-    formMounted();
-    return () => {
-      formUnmounted();
-    };
-  });
+import {
+  $email,
+  emailChanged,
+  $password,
+  passwordChanged,
+  $emailError,
+  $passwordError,
+  submitLoginForm,
+  $isFormDisabled,
+  $isSubmitEnabled
+} from "./model/login";
+import { Button, AuthLink } from "@ui/atoms";
+import { Form } from "@ui/molecules/form";
+import { Input2 } from "@ui/atoms/input";
 
-  const isDisabled = useStore($isFormDisabled);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitted(e);
-  };
+export const LoginForm = () => {
+  const submitDisabled = useStore($isSubmitEnabled);
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      title="Login"
-      link={<Link to="/register">go to register form</Link>}
-    >
-      <Field
-        name="email"
-        type="text"
-        label="email"
-        autoComplete="email"
-        disabled={isDisabled}
-      />
-      <Field
-        name="password"
-        type="password"
-        label="password"
-        autoComplete="current password"
-        disabled={isDisabled}
-      />
+    <Form onSubmit={submitLoginForm} title="Login">
+      <Email />
+      <Password />
       <Container>
-        <Button type="submit" disabled={isDisabled}>
+        <Button type="submit" disabled={!submitDisabled}>
           login
         </Button>
       </Container>
+      <AuthLink to="/register">go to register form</AuthLink>
     </Form>
+  );
+};
+
+const Email = () => {
+  const email = useStore($email);
+  const emailError = useStore($emailError);
+  const isEmailDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input2
+      value={email}
+      onChange={emailChanged}
+      error={email && emailError}
+      label="email"
+      name="email"
+      type="email"
+      autoComplete="email"
+      disabled={isEmailDisabled}
+    />
+  );
+};
+
+const Password = () => {
+  const password = useStore($password);
+  const passwordError = useStore($passwordError);
+  const isPasswordDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input2
+      value={password}
+      onChange={passwordChanged}
+      error={password && passwordError}
+      label="password"
+      name="password"
+      type="password"
+      autoComplete="password"
+      disabled={isPasswordDisabled}
+    />
   );
 };
 

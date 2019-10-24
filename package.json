@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "browser-cookies": "^1.2.0",
-    "effector": "^20.3.0",
+    "effector": "^20.4.2",
     "effector-react": "^20.4.0",
     "history": "^4.10.1",
     "react": "^16.9.0",

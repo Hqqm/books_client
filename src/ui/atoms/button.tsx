@@ -7,7 +7,7 @@ interface Props {
 export const Button = styled.button<Props>`
   width: 100%;
   padding: 10px;
-  background: #c9e2aa;
+  background: #a75aff;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -25,8 +25,12 @@ export const Button = styled.button<Props>`
   &:disabled:hover,
   &:disabled:focus,
   &:disabled:active {
-    background-color: #d2d8de;
-    border-color: #d2d8de;
-    color: #d2d8de;
+    background-color: #d2d2d2;
+    border-color: #d2d2d2;
+    color: white;
+  }
+
+  &:disabled {
+    cursor: default;
   }
 `;

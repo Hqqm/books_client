@@ -1,26 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 import { Field } from "./Text";
-import { Button } from "@ui/atoms";
+import { Button, AuthLink } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
-import { formMounted, formUnmounted, formSubmitted } from "./model/register";
+import { formSubmitted } from "./model/register";
 
 export const RegisterForm = () => {
-  React.useEffect(() => {
-    formMounted();
-    return () => {
-      formUnmounted();
-    };
-  });
-
   return (
-    <Form
-      onSubmit={formSubmitted}
-      title="Sign in"
-      link={<Link to="/auth">go to login form</Link>}
-    >
+    <Form onSubmit={formSubmitted} title="Sign in">
       <Field name="email" type="text" label="email" autoComplete="email" />
       <Field name="first_name" type="text" label="first name" autoComplete="name" />
       <Field name="last_name" type="text" label="last name" autoComplete="name" />
@@ -39,6 +27,7 @@ export const RegisterForm = () => {
       <Container>
         <Button type="submit">register</Button>
       </Container>
+      <AuthLink to="/auth">go to login form</AuthLink>
     </Form>
   );
 };
