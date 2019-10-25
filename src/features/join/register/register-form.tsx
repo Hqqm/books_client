@@ -1,34 +1,137 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useStore } from "effector-react";
 
-import { Field } from "./Text";
-import { Button, AuthLink } from "@ui/atoms";
+import { Button, AuthLink, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
-import { formSubmitted } from "./model/register";
+import {
+  formSubmitted,
+  $email,
+  emailChanged,
+  $password,
+  passwordChanged,
+  $firstName,
+  firstNameChanged,
+  $lastName,
+  lastNameChanged,
+  $passwordConfirmation,
+  passwordConfirmationChanged,
+  $emailError,
+  $isFormDisabled,
+  $passwordError,
+  $firstNameError,
+  $lastNameError,
+  $passwordConfirmationError
+} from "./model/register";
 
 export const RegisterForm = () => {
   return (
-    <Form onSubmit={formSubmitted} title="Sign in">
-      <Field name="email" type="text" label="email" autoComplete="email" />
-      <Field name="first_name" type="text" label="first name" autoComplete="name" />
-      <Field name="last_name" type="text" label="last name" autoComplete="name" />
-      <Field
-        name="password"
-        type="password"
-        label="password"
-        autoComplete="current password"
-      />
-      <Field
-        name="password_confirmation"
-        type="password"
-        label="confirm password"
-        autoComplete="current password"
-      />
+    <Form onSubmit={formSubmitted} title="Регистрация">
+      <Email />
+      <Password />
+      <FirstName />
+      <LastName />
+      <PasswordConfirmation />
       <Container>
-        <Button type="submit">register</Button>
+        <Button type="submit">Зарегистрироваться</Button>
       </Container>
-      <AuthLink to="/auth">go to login form</AuthLink>
+      <AuthLink to="/auth">Перейти к входу</AuthLink>
     </Form>
+  );
+};
+
+const Email = () => {
+  const email = useStore($email);
+  const emailError = useStore($emailError);
+  const isEmailDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input
+      value={email}
+      onChange={emailChanged}
+      error={email && emailError}
+      label="Почта"
+      name="email"
+      type="email"
+      autoComplete="email"
+      disabled={isEmailDisabled}
+    />
+  );
+};
+
+const Password = () => {
+  const password = useStore($password);
+  const passwordError = useStore($passwordError);
+  const isPasswordDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input
+      value={password}
+      onChange={passwordChanged}
+      error={password && passwordError}
+      label="Пароль"
+      name="password"
+      type="password"
+      autoComplete="password"
+      disabled={isPasswordDisabled}
+    />
+  );
+};
+
+const FirstName = () => {
+  const firstName = useStore($firstName);
+  const firstNameError = useStore($firstNameError);
+  const isFirstNameDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input
+      value={firstName}
+      onChange={firstNameChanged}
+      error={firstName && firstNameError}
+      label="Имя"
+      name="first_name"
+      type="text"
+      autoComplete="true"
+      disabled={isFirstNameDisabled}
+    />
+  );
+};
+
+const LastName = () => {
+  const lastName = useStore($lastName);
+  const lastNameError = useStore($lastNameError);
+  const isFirstNameDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input
+      value={lastName}
+      onChange={lastNameChanged}
+      error={lastName && lastNameError}
+      label="Фамилия"
+      name="last_name"
+      type="text"
+      autoComplete="true"
+      disabled={isFirstNameDisabled}
+    />
+  );
+};
+
+const PasswordConfirmation = () => {
+  const passwordConfirmation = useStore($passwordConfirmation);
+  const passwordConfirmationError = useStore($passwordConfirmationError);
+  const isPasswordConfirmationDisabled = useStore($isFormDisabled);
+
+  return (
+    <Input
+      value={passwordConfirmation}
+      onChange={passwordConfirmationChanged}
+      error={passwordConfirmation && passwordConfirmationError}
+      label="Потвердите пароль"
+      name="password_confirmation"
+      type="password"
+      autoComplete="true"
+      disabled={isPasswordConfirmationDisabled}
+    />
   );
 };
 

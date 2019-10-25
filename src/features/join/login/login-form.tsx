@@ -13,23 +13,22 @@ import {
   $isFormDisabled,
   $isSubmitEnabled
 } from "./model/login";
-import { Button, AuthLink } from "@ui/atoms";
+import { Button, AuthLink, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
-import { Input2 } from "@ui/atoms/input";
 
 export const LoginForm = () => {
   const submitDisabled = useStore($isSubmitEnabled);
 
   return (
-    <Form onSubmit={submitLoginForm} title="Login">
+    <Form onSubmit={submitLoginForm} title="Вход">
       <Email />
       <Password />
       <Container>
         <Button type="submit" disabled={!submitDisabled}>
-          login
+          Войти
         </Button>
       </Container>
-      <AuthLink to="/register">go to register form</AuthLink>
+      <AuthLink to="/register">Перейти к регистрации</AuthLink>
     </Form>
   );
 };
@@ -40,11 +39,11 @@ const Email = () => {
   const isEmailDisabled = useStore($isFormDisabled);
 
   return (
-    <Input2
+    <Input
       value={email}
       onChange={emailChanged}
       error={email && emailError}
-      label="email"
+      label="Почта"
       name="email"
       type="email"
       autoComplete="email"
@@ -59,11 +58,11 @@ const Password = () => {
   const isPasswordDisabled = useStore($isFormDisabled);
 
   return (
-    <Input2
+    <Input
       value={password}
       onChange={passwordChanged}
       error={password && passwordError}
-      label="password"
+      label="Пароль"
       name="password"
       type="password"
       autoComplete="password"

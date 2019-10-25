@@ -12,13 +12,21 @@ export const NewBook = () => {
           name="author"
           type="text"
           autoComplete="true"
+          disabled={false}
         />
-        <Field placeholder="name" name="name" type="text" autoComplete="true" />
+        <Field
+          placeholder="name"
+          name="name"
+          type="text"
+          autoComplete="true"
+          disabled={false}
+        />
         <Field
           placeholder="price"
           name="price"
           type="text"
           autoComplete="true"
+          disabled={false}
         />
         <button type="submit">Добавить новую книгу</button>
       </Form>

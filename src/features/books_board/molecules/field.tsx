@@ -8,7 +8,7 @@ type FieldProps = {
   type: string;
   label?: string;
   autoComplete: string;
-  disabled?: boolean;
+  disabled: boolean;
   placeholder: string;
 };
 
@@ -36,6 +36,7 @@ export const Field: React.FC<FieldProps> = ({
       name={name}
       type={type}
       value={value}
+      error={null}
       onChange={handleChange}
       label={label}
       autoComplete={autoComplete}

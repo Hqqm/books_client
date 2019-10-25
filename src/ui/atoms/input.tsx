@@ -4,41 +4,6 @@ import styled, { css } from "styled-components";
 interface InputProps {
   label?: React.ReactNode;
   value: any;
-  name: string;
-  placeholder?: string;
-  type: string;
-  autoComplete: string;
-  disabled?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export const Input = ({
-  label,
-  value,
-  name,
-  type,
-  placeholder,
-  autoComplete,
-  disabled,
-  onChange
-}: InputProps) => (
-  <Container>
-    {label && <InputLabel>{label}</InputLabel>}
-    <StyledInput
-      value={value}
-      onChange={onChange}
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      autoComplete={autoComplete}
-      disabled={disabled}
-    />
-  </Container>
-);
-
-interface InputProps2 {
-  label?: React.ReactNode;
-  value: any;
   error: string | null;
   name: string;
   placeholder?: string;
@@ -48,7 +13,7 @@ interface InputProps2 {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input2 = ({
+export const Input = ({
   label,
   error,
   value,
@@ -57,10 +22,10 @@ export const Input2 = ({
   placeholder,
   onChange,
   disabled
-}: InputProps2) => (
+}: InputProps) => (
   <Container>
     {label && <InputLabel>{label}</InputLabel>}
-    <StyledInput2
+    <StyledInput
       error={error}
       value={value}
       onChange={onChange}
@@ -74,32 +39,10 @@ export const Input2 = ({
 );
 
 interface Props {
-  error?: string;
-}
-
-const StyledInput = styled.input<Props>`
-  width: 100%;
-  height: 40px;
-  padding-left: 10px;
-  border-radius: 5px;
-  border: 1px solid #a75aff;
-  color: #000;
-  font-size: 1.3rem;
-  &:disabled {
-    background-color: #cae2ab80;
-  }
-  ${({ error }) =>
-    error &&
-    css`
-      border-color: #ff0000b8;
-    `}
-`;
-
-interface Props2 {
   error: string | null;
 }
 
-const StyledInput2 = styled.input<Props2>`
+const StyledInput = styled.input<Props>`
   width: 100%;
   height: 40px;
   padding-left: 10px;
