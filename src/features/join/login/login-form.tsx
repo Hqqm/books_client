@@ -11,16 +11,19 @@ import {
   $passwordError,
   submitLoginForm,
   $isFormDisabled,
-  $isSubmitEnabled
+  $isSubmitEnabled,
+  $formError
 } from "./model/login";
 import { Button, AuthLink, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 
 export const LoginForm = () => {
   const submitDisabled = useStore($isSubmitEnabled);
+  const formError = useStore($formError);
 
   return (
     <Form onSubmit={submitLoginForm} title="Вход">
+      {formError}
       <Email />
       <Password />
       <Container>
@@ -65,7 +68,7 @@ const Password = () => {
       label="Пароль"
       name="password"
       type="password"
-      autoComplete="password"
+      autoComplete="current-password"
       disabled={isPasswordDisabled}
     />
   );

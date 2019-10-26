@@ -7,6 +7,8 @@ import { pageListOfBooksReady } from "./model/fetch-books";
 import { Book } from "@features/books_board/molecules/book";
 import { NewBook } from "./molecules/new-book";
 import { removeBook } from "./model/delete-book";
+import { Button } from "@ui/atoms";
+import { loadMore } from "pages/book/model";
 
 export const ListOfBooks = () => {
   React.useEffect(() => {
@@ -14,9 +16,12 @@ export const ListOfBooks = () => {
   }, []);
 
   const books = useList($allBooks, ({ author, name, price, id }) => (
-    <Book author={author} name={name} price={price}>
-      <button onClick={() => removeBook(id)}>remove book</button>
-    </Book>
+    <Container>
+      <Book author={author} name={name} price={price}>
+        <Button onClick={() => loadMore(id.toString())}>Подробнее</Button>
+        <Button onClick={() => removeBook(id)}>remove book</Button>
+      </Book>
+    </Container>
   ));
 
   return (
@@ -33,4 +38,13 @@ const Ul = styled.ul`
   grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   margin-top: 20px;
+`;
+
+const Container = styled.li`
+  width: 180px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
 `;

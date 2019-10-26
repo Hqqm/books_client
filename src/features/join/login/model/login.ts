@@ -3,7 +3,6 @@ import {
   createEffect,
   createStore,
   createEvent,
-  sample,
   createStoreObject,
   combine
 } from "effector";
@@ -19,8 +18,13 @@ export const passwordChanged = createEvent<React.SyntheticEvent<HTMLInputElement
 export const submitted = createEvent<React.FormEvent<HTMLFormElement>>();
 export const formMounted = createEvent();
 export const formUnmounted = createEvent();
+export const errorThrowed = createEvent<string>();
 
-export const createSession = createEffect<FormData, string | null, Error>();
+export const createSession = createEffect<
+  FormData,
+  { token: string; error: null } | { token: null; error: string },
+  Error
+>();
 
 export const $email = createStore<string>("");
 export const $emailError = $email.map<string | null>(emailValidator);
@@ -29,6 +33,10 @@ export const $isEmailCorrect = $emailError.map<boolean>(value => value === null)
 export const $password = createStore<string>("");
 export const $passwordError = $password.map<string | null>(passwordValidator);
 export const $isPasswordCorrect = $passwordError.map<boolean>(value => value === null);
+
+export const $formError = createStore<string | null>(null)
+  .on(errorThrowed, (_, error) => error)
+  .reset(formMounted, formUnmounted);
 
 export const submitLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
@@ -59,19 +67,22 @@ $password.on(passwordChanged.map(e => e.currentTarget.value), (_, password) => p
 $email.reset(formMounted, formUnmounted);
 $password.reset(formMounted, formUnmounted);
 
-sample({
-  source: $loginForm,
-  clock: submitted,
-  target: createSession
+submitted.watch(() => {
+  const data = $loginForm.getState();
+  console.log(data);
+  createSession(data);
 });
 
 createSession.use(createSessionHandler);
 
 createSession.done.watch(({ result }) => {
-  const token = result ? result : null;
-  tokenChanged(token);
-  loadSession();
-  history.replace("/books");
+  if (result.token !== null) {
+    tokenChanged(result.token);
+    loadSession();
+    history.push("/books");
+  } else {
+    errorThrowed(`${result.error}`);
+  }
 });
 
 formMounted.watch(() => {

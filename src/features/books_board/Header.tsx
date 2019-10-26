@@ -3,11 +3,7 @@ import styled from "styled-components";
 import { useStore } from "effector-react";
 
 import { history } from "@lib/history";
-import {
-  $session,
-  $isAuthenticated,
-  dropSession
-} from "@features/shared/session";
+import { $session, $isAuthenticated, dropSession } from "@features/shared/session";
 import { UserData } from "@api/account";
 import { Button } from "@ui/atoms";
 

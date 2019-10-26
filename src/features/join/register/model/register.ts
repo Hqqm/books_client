@@ -71,7 +71,7 @@ $passwordConfirmation.reset(formMounted, formUnmounted);
 
 export const $isFormDisabled = registerUser.pending;
 
-const $form = createStoreObject({
+const $registerForm = createStoreObject({
   email: $email,
   first_name: $firstName,
   last_name: $lastName,
@@ -80,7 +80,7 @@ const $form = createStoreObject({
 });
 
 sample({
-  source: $form,
+  source: $registerForm,
   clock: formSubmitted,
   target: registerUser
 });
