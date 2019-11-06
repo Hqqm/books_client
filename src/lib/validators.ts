@@ -10,7 +10,7 @@ export const passwordValidator = (value: string) => {
   return "пароль должен быть больше 3 символов";
 };
 
-const textRegexp = /^[a-z ,.'-]+$/i;
+const textRegexp = /^[а-я a-z,.'-]+$/i;
 export const textValidator = (value: string) => {
   if (!textRegexp.test(value)) return "Поле должно содержать только буквы";
   return null;

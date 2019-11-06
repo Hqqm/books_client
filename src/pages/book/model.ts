@@ -3,16 +3,19 @@ import { createEffect, createStore, createEvent } from "effector";
 import { $token } from "@features/shared/token";
 import { history } from "@lib/history";
 
-const initialState: Book = {
-  id: 0,
-  author: "",
-  name: "",
-  price: ""
+type BookWithAuthor = {
+  book: Book;
+  author_name: string;
+};
+
+const initialState: BookWithAuthor = {
+  book: { id: 0, author_id: 0, name: "", price: 0 },
+  author_name: ""
 };
 
 export const loadMore = createEvent<string>();
-export const fetchBookById = createEffect<string, Book, Error>();
-export const currentBook = createStore<Book>(initialState);
+export const fetchBookById = createEffect<string, BookWithAuthor, Error>();
+export const currentBook = createStore<BookWithAuthor>(initialState);
 
 currentBook.on(fetchBookById.done, (_, { result }) => result);
 

@@ -2,21 +2,25 @@ import { $token } from "@features/shared/token";
 
 export type Book = {
   id: number;
-  author: string;
+  author_id: number;
   name: string;
-  price: string;
+  price: number;
 };
 
 export type BookProps = {
-  author: string;
+  author_id: string;
   name: string;
   price: string;
 };
 
-export const createBook = async ({ author, name, price }: BookProps) => {
+export const createBook = async ({ author_id, name, price }: BookProps) => {
   const response = await fetch("/api/books", {
     method: "POST",
-    body: JSON.stringify({ author, name, price: parseInt(price) }),
+    body: JSON.stringify({
+      author_id: parseInt(author_id),
+      name,
+      price: parseInt(price)
+    }),
     headers: {
       "Content-Type": "application/json",
       "x-csrf-token": $token.getState() || ""
@@ -24,6 +28,7 @@ export const createBook = async ({ author, name, price }: BookProps) => {
   });
 
   const book = await response.json();
+  console.log(book);
   return book;
 };
 
@@ -37,12 +42,12 @@ export const removeBookHandler = async (id: number) => {
 };
 
 export const fetchBooks = async () => {
-  const req = await fetch("/api/books", {
+  const response = await fetch("/api/books", {
     method: "GET",
     headers: {
       "x-csrf-token": $token.getState() || ""
     }
   });
-  const json = req.json();
-  return json;
+
+  return response.json();
 };

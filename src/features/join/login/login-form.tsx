@@ -23,7 +23,7 @@ export const LoginForm = () => {
 
   return (
     <Form onSubmit={submitLoginForm} title="Вход">
-      {formError}
+      {mapResponseError(formError)}
       <Email />
       <Password />
       <Container>
@@ -31,7 +31,7 @@ export const LoginForm = () => {
           Войти
         </Button>
       </Container>
-      <AuthLink to="/register">Перейти к регистрации</AuthLink>
+      <AuthLink to="/register">Перейти к регистрации &#8658;</AuthLink>
     </Form>
   );
 };
@@ -78,3 +78,16 @@ const Container = styled.div`
   width: 100%;
   margin-top: 10px;
 `;
+
+const mapResponseError = (err: string | null) => {
+  switch (err) {
+    case "Not Found":
+      return "User not found";
+    case "Internal Server Error":
+      return "Wrong email or password";
+    case null:
+      return null;
+    default:
+      return "Got an unexpected error. Try again later";
+  }
+};

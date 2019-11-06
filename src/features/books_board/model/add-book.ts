@@ -2,7 +2,7 @@ import { createEffect, createEvent, createStore, sample } from "effector";
 import { Book, BookProps, createBook } from "@api/books";
 
 const initialState: BookProps = {
-  author: "",
+  author_id: "",
   name: "",
   price: ""
 };

@@ -8,8 +8,8 @@ export const NewBook = () => {
     <Container>
       <Form onSubmit={newBookFormSubmited}>
         <Field
-          placeholder="author"
-          name="author"
+          placeholder="author_id"
+          name="author_id"
           type="text"
           autoComplete="true"
           disabled={false}

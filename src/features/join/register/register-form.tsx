@@ -35,7 +35,7 @@ export const RegisterForm = () => {
       <Container>
         <Button type="submit">Зарегистрироваться</Button>
       </Container>
-      <AuthLink to="/auth">Перейти к входу</AuthLink>
+      <AuthLink to="/auth">Перейти к входу &#8658;</AuthLink>
     </Form>
   );
 };
@@ -72,7 +72,7 @@ const Password = () => {
       label="Пароль"
       name="password"
       type="password"
-      autoComplete="password"
+      autoComplete="new-password"
       disabled={isPasswordDisabled}
     />
   );
@@ -129,7 +129,7 @@ const PasswordConfirmation = () => {
       label="Потвердите пароль"
       name="password_confirmation"
       type="password"
-      autoComplete="true"
+      autoComplete="new-password"
       disabled={isPasswordConfirmationDisabled}
     />
   );

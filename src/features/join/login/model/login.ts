@@ -44,6 +44,7 @@ export const submitLoginForm = (e: React.FormEvent<HTMLFormElement>) => {
 };
 
 export const $isFormDisabled = createSession.pending;
+
 const $isFormValid = combine(
   $isPasswordCorrect,
   $isEmailCorrect,
@@ -69,7 +70,6 @@ $password.reset(formMounted, formUnmounted);
 
 submitted.watch(() => {
   const data = $loginForm.getState();
-  console.log(data);
   createSession(data);
 });
 

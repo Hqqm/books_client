@@ -1,29 +1,29 @@
 import * as React from "react";
-import styled from "styled-components";
+import { userBooksPageMounted, $userAllBooks } from "./model";
 import { useList } from "effector-react";
-
-import { $allBooks } from "./model/books";
+import styled from "styled-components";
 import { Book } from "@features/books_board/molecules/book";
-import { NewBook } from "./molecules/new-book";
-import { removeBook } from "./model/delete-book";
 import { Button } from "@ui/atoms";
 import { loadMore } from "pages/book/model";
 
+export const UserBooks = () => {
+  React.useEffect(() => {
+    userBooksPageMounted();
+  });
+
+  return <ListOfBooks />;
+};
+
 export const ListOfBooks = () => {
-  const books = useList($allBooks, ({ author_id, name, price, id }) => (
+  const books = useList($userAllBooks, ({ author_id, name, price, id }) => (
     <Container>
       <Book author={author_id.toString()} name={name} price={price}>
         <Button onClick={() => loadMore(id.toString())}>Подробнее</Button>
-        <Button onClick={() => removeBook(id)}>remove book</Button>
       </Book>
     </Container>
   ));
 
-  return (
-    <Ul>
-      {books} <NewBook />
-    </Ul>
-  );
+  return <Ul>{books}</Ul>;
 };
 
 const Ul = styled.ul`

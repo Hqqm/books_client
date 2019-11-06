@@ -18,10 +18,14 @@ export const BookPage = () => {
 };
 
 const CurrentBook = () => {
-  const { author, name, price } = useStore(currentBook);
+  const {
+    book: { name, price },
+    author_name
+  } = useStore(currentBook);
+
   return (
     <Container>
-      <Book author={author} name={name} price={price}>
+      <Book author={author_name} name={name} price={price}>
         <Link to="/books">вернутся к книгам</Link>
       </Book>
     </Container>

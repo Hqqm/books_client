@@ -5,15 +5,15 @@ import { Button } from "@ui/atoms/button";
 type Props = {
   author: string;
   name: string;
-  price: string;
+  price: number;
   children: React.ReactNode;
 };
 
 export const Book: React.FC<Props> = ({ author, name, price, children }) => {
   return (
     <>
-      <div>{author}</div>
-      <div>{name}</div>
+      <div> {author}</div>
+      <div> {name}</div>
       <div>цена:{price}</div>
       <div>{children}</div>
       <Button>Оформить</Button>
