@@ -7,7 +7,7 @@ interface InputProps {
   error: string | null;
   name: string;
   placeholder?: string;
-  type: string;
+  type?: string;
   autoComplete: string;
   disabled: boolean;
 

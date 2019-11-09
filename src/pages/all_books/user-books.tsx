@@ -6,10 +6,10 @@ import { Book } from "@features/books_board/molecules/book";
 import { Button } from "@ui/atoms";
 import { loadMore } from "pages/book/model";
 
-export const UserBooks = () => {
+export const UserBooksPage = () => {
   React.useEffect(() => {
     userBooksPageMounted();
-  });
+  }, []);
 
   return <ListOfBooks />;
 };
@@ -19,6 +19,7 @@ export const ListOfBooks = () => {
     <Container>
       <Book author={author_id.toString()} name={name} price={price}>
         <Button onClick={() => loadMore(id.toString())}>Подробнее</Button>
+        <Button>Оформить</Button>
       </Book>
     </Container>
   ));

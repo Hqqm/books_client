@@ -7,8 +7,10 @@ export const HomePage = () => (
     <br />
     <Link to="register">go to register</Link>
     <br />
-    <Link to="/books">go to books</Link>
+    <Link to="/books">go to books panel</Link>
     <br />
-    <Link to="/user_books">go to user books</Link>
+    <Link to="/userBooks">go to books</Link>
+    <br />
+    <Link to="/createAuthor">go to create author page</Link>
   </div>
 );

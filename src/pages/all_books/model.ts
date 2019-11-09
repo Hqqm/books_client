@@ -9,7 +9,7 @@ export const loadAllUsersBooks = createEffect<void, Book[], Error>(
 export const $userAllBooks = createStore<Book[]>([]);
 
 loadAllUsersBooks.use(async () => {
-  const response = await fetch("/api/allBooks", {
+  const response = await fetch("/api/userBooks", {
     method: "GET",
     headers: {
       "x-csrf-token": $token.getState() || ""
