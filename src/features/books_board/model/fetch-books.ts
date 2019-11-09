@@ -7,6 +7,4 @@ export const loadBooks = createEffect<void, Book[], Error>();
 
 loadBooks.use(fetchBooks);
 
-pageListOfBooksReady.watch(() => {
-  loadBooks();
-});
+pageListOfBooksReady.watch(() => loadBooks());

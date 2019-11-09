@@ -13,17 +13,17 @@ import {
   countryChanged,
   authorFormSubmitted,
   $isAuthorFormSubmitEnabled
-} from "./model";
+} from "./model/create-author";
 import { Input, Button } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 import styled from "styled-components";
 import { AuthTemplate } from "@ui/templates/auth-template";
 
-export const CreateAuthorPage = () => {
-  return <AuthTemplate form={<CreateAuthorForm />} />;
+export const CreateAuthorForm = () => {
+  return <AuthTemplate form={<AuthorForm />} />;
 };
 
-const CreateAuthorForm = () => {
+const AuthorForm = () => {
   const submitEnabled = useStore($isAuthorFormSubmitEnabled);
   return (
     <Form onSubmit={authorFormSubmitted} title="Создание автора">
