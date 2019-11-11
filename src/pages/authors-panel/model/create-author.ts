@@ -7,6 +7,7 @@ import {
 } from "effector";
 import { textValidator, dateOfBirthValidator } from "@lib/validators";
 import { $token } from "@features/shared/token";
+import { Author } from "../authors-table";
 
 type AuthorProps = {
   fio: string;
@@ -24,9 +25,7 @@ export const countryChanged = createEvent<React.SyntheticEvent<HTMLInputElement>
   "author country changed"
 );
 
-export const createAuthor = createEffect<AuthorProps, AuthorProps, Error>(
-  "create author"
-);
+export const createAuthor = createEffect<AuthorProps, Author, Error>("create author");
 export const authorFormSubmitted = createEvent<React.FormEvent<HTMLFormElement>>();
 
 export const $authorFio = createStore<string>("");
@@ -52,6 +51,7 @@ $authorDateOfBirth.on(
   dateOfBirthChanged.map(e => e.currentTarget.value),
   (_, dateOfBirth) => dateOfBirth
 );
+
 $authorCountry.on(
   countryChanged.map(e => e.currentTarget.value),
   (_, country) => country
@@ -64,7 +64,7 @@ export const $AuthorForm = createStoreObject({
 });
 
 createAuthor.use(async data => {
-  const response = await fetch("/api/author", {
+  const response = await fetch("/api/authors", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -96,3 +96,5 @@ authorFormSubmitted.watch(() => {
   const data = $AuthorForm.getState();
   createAuthor(data);
 });
+
+authorFormSubmitted.watch(e => e.preventDefault());

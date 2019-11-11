@@ -1,5 +1,8 @@
 import * as React from "react";
+import styled from "styled-components";
 import { useStore } from "effector-react";
+import { Input, Button } from "@ui/atoms";
+import { Form } from "@ui/molecules/form";
 import {
   $authorFio,
   $authorFioError,
@@ -14,27 +17,19 @@ import {
   authorFormSubmitted,
   $isAuthorFormSubmitEnabled
 } from "./model/create-author";
-import { Input, Button } from "@ui/atoms";
-import { Form } from "@ui/molecules/form";
-import styled from "styled-components";
-import { AuthTemplate } from "@ui/templates/auth-template";
 
-export const CreateAuthorForm = () => {
-  return <AuthTemplate form={<AuthorForm />} />;
-};
-
-const AuthorForm = () => {
+export const AuthorForm = () => {
   const submitEnabled = useStore($isAuthorFormSubmitEnabled);
   return (
     <Form onSubmit={authorFormSubmitted} title="Создание автора">
       <AuthorFioField />
       <AuthorDateOfBirthField />
       <AuthorCountryField />
-      <Container>
+      <ButtonContainer>
         <Button type="submit" disabled={!submitEnabled}>
           создать автора
         </Button>
-      </Container>
+      </ButtonContainer>
     </Form>
   );
 };
@@ -93,7 +88,7 @@ const AuthorCountryField = () => {
   );
 };
 
-const Container = styled.div`
+const ButtonContainer = styled.div`
   width: 100%;
   margin-top: 10px;
 `;

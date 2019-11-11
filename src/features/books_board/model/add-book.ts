@@ -29,4 +29,4 @@ sample({
   target: addBook
 });
 
-newBookFormSubmited.watch((e: any) => e.preventDefault());
+newBookFormSubmited.watch(e => e.preventDefault());

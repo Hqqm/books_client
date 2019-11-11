@@ -11,16 +11,18 @@ export const UserBooksPage = () => {
     userBooksPageMounted();
   }, []);
 
-  return <ListOfBooks />;
+  return (
+    <>
+      <ListOfBooks />
+    </>
+  );
 };
 
 export const ListOfBooks = () => {
   const books = useList($userAllBooks, ({ author_id, name, price, id }) => (
     <Container>
-      <Book author={author_id.toString()} name={name} price={price}>
-        <Button onClick={() => loadMore(id.toString())}>Подробнее</Button>
-        <Button>Оформить</Button>
-      </Book>
+      <Book author={author_id.toString()} name={name} price={price} />
+      <Button onClick={() => loadMore(id.toString())}>Подробнее</Button>
     </Container>
   ));
 

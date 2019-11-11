@@ -25,9 +25,8 @@ const CurrentBook = () => {
 
   return (
     <Container>
-      <Book author={author_name} name={name} price={price}>
-        <Link to="/books">вернутся к книгам</Link>
-      </Book>
+      <Book author={author_name} name={name} price={price} />
+      <Link to="/books">вернутся к книгам</Link>
     </Container>
   );
 };
