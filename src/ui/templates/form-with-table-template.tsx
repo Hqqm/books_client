@@ -9,9 +9,11 @@ type FormWithList = {
 export const FormWithTableTemplate = ({ form, table }: FormWithList) => (
   <WrapperFormWithTable>
     {form && (
-      <FormWrapper>
-        <FormContainer>{form}</FormContainer>
-      </FormWrapper>
+      <FixedWrapper>
+        <FormWrapper>
+          <FormContainer>{form}</FormContainer>
+        </FormWrapper>
+      </FixedWrapper>
     )}
     {table && <TableWrapper>{table}</TableWrapper>}
   </WrapperFormWithTable>
@@ -19,15 +21,21 @@ export const FormWithTableTemplate = ({ form, table }: FormWithList) => (
 
 const WrapperFormWithTable = styled.div`
   display: flex;
-  justify-content: space-around;
+  height: 100%;
+  justify-content: flex-start;
+`;
+
+const FixedWrapper = styled.div`
+  width: 500px;
 `;
 
 const FormWrapper = styled.div`
+  position: fixed;
+  left: 30px;
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
   align-items: center;
-  justify-content: space-around;
 `;
 
 const FormContainer = styled.div`
@@ -41,5 +49,5 @@ const FormContainer = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  margin: 80px 20px 0 20px;
+  margin: auto;
 `;

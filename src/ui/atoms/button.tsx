@@ -37,9 +37,18 @@ export const Button = styled.button<Props>`
 `;
 
 export const TableButton = styled(Button)`
+  margin: 5px;
   padding: 5px;
 `;
 
+export const AddButton = styled(Button)`
+  margin: 5px;
+  padding: 5px;
+  background: #5dd042;
+`;
+
 export const DeleteButton = styled(Button)`
+  margin: 5px;
+  padding: 5px;
   background: #da3535;
 `;

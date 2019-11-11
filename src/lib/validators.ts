@@ -23,8 +23,8 @@ export const passwordConfirmation = (confirmPassword: string, password: string) 
   return "Пароли не совпадают";
 };
 
-const dateOfBirthRegexp = /^[1-9]+$/i;
-export const dateOfBirthValidator = (value: string) => {
-  if (!dateOfBirthRegexp.test(value)) return "Поле должно содержать только цифры";
+const numberOnly = /^[1-9]+$/i;
+export const numberOnlyValidator = (value: string) => {
+  if (!numberOnly.test(value)) return "Поле должно содержать только цифры";
   return null;
 };

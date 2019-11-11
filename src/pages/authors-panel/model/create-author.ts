@@ -5,7 +5,7 @@ import {
   combine,
   createEffect
 } from "effector";
-import { textValidator, dateOfBirthValidator } from "@lib/validators";
+import { textValidator, numberOnlyValidator } from "@lib/validators";
 import { $token } from "@features/shared/token";
 import { Author } from "../authors-table";
 
@@ -34,7 +34,7 @@ export const $isAuthorFioCorrect = $authorFioError.map<boolean>(value => value =
 
 export const $authorDateOfBirth = createStore<string>("");
 export const $authorDateOfBirthError = $authorDateOfBirth.map<string | null>(
-  dateOfBirthValidator
+  numberOnlyValidator
 );
 export const $isAuthorDateOfBirthCorrect = $authorDateOfBirthError.map<boolean>(
   value => value === null
