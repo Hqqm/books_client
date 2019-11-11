@@ -1,23 +1,30 @@
 import * as React from "react";
 import styled from "styled-components";
+import { $session } from "@features/shared/session";
+import { useStore } from "effector-react";
+import { isAdmin } from "@lib/isAdmin";
 
 type FormWithList = {
   form: React.ReactNode;
   table: React.ReactNode;
 };
 
-export const FormWithTableTemplate = ({ form, table }: FormWithList) => (
-  <WrapperFormWithTable>
-    {form && (
-      <FixedWrapper>
-        <FormWrapper>
-          <FormContainer>{form}</FormContainer>
-        </FormWrapper>
-      </FixedWrapper>
-    )}
-    {table && <TableWrapper>{table}</TableWrapper>}
-  </WrapperFormWithTable>
-);
+export const FormWithTableTemplate = ({ form, table }: FormWithList) => {
+  const curentUser = useStore($session);
+
+  return (
+    <WrapperFormWithTable>
+      {form && isAdmin(curentUser) && (
+        <FixedWrapper>
+          <FormWrapper>
+            <FormContainer>{form}</FormContainer>
+          </FormWrapper>
+        </FixedWrapper>
+      )}
+      {table && <TableWrapper>{table}</TableWrapper>}
+    </WrapperFormWithTable>
+  );
+};
 
 const WrapperFormWithTable = styled.div`
   display: flex;
@@ -27,6 +34,7 @@ const WrapperFormWithTable = styled.div`
 
 const FixedWrapper = styled.div`
   width: 500px;
+  background: #e2e2e2;
 `;
 
 const FormWrapper = styled.div`
@@ -49,5 +57,5 @@ const FormContainer = styled.div`
 `;
 
 const TableWrapper = styled.div`
-  margin: auto;
+  margin: 50px auto;
 `;

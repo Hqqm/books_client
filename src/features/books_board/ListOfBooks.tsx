@@ -12,7 +12,7 @@ import { $session } from "@features/shared/session";
 import { isAdmin } from "@lib/isAdmin";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
 import { Table } from "pages/authors-panel/authors-table";
-import { TableButton, DeleteButton, AddButton } from "@ui/atoms/button";
+import { TableButton } from "@ui/atoms/button";
 
 export const ListOfBooks = () => {
   const currentUser = useStore($session);
@@ -23,12 +23,19 @@ export const ListOfBooks = () => {
     <tr>
       <BookItem {...book} />
       <ButtonContainer>
-        <TableButton onClick={() => loadMore(book.id.toString())}>Подробнее</TableButton>
-        <AddButton onClick={() => takeBook({ book_id: book.id, amount: 1 })}>
-          Взять книгу
-        </AddButton>
+        <TableButton onClick={() => loadMore(book.id.toString())} backColor="#4d7689">
+          Подробнее
+        </TableButton>
+        <TableButton
+          onClick={() => takeBook({ book_id: book.id, amount: 1 })}
+          backColor="#517b03"
+        >
+          Взять
+        </TableButton>
         {isAdmin(currentUser) && (
-          <DeleteButton onClick={() => removeBook(book.id)}>удалить книгу</DeleteButton>
+          <TableButton onClick={() => removeBook(book.id)} backColor="#da3535">
+            Удалить
+          </TableButton>
         )}
       </ButtonContainer>
     </tr>
@@ -36,7 +43,7 @@ export const ListOfBooks = () => {
 
   return (
     <FormWithTableTemplate
-      form={<> {isAdmin(currentUser) && <NewBookForm />} </>}
+      form={<NewBookForm />}
       table={<Table headItems={tableHeadItems} bodyItems={books} />}
     />
   );

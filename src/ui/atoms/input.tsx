@@ -48,8 +48,7 @@ const StyledInput = styled.input<Props>`
   height: 40px;
   padding-left: 10px;
   border-radius: 5px;
-  border: 1px solid #a75aff;
-  color: #a75aff;
+  border: 1px solid #5fa6c5;
   font-size: 1.3rem;
   &:disabled {
     background-color: #d2d2d2;
@@ -67,7 +66,7 @@ const Container = styled.div`
 `;
 
 const InputLabel = styled.label`
-  color: #a75aff;
+  font-size: 1.2rem;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   text-align: left;

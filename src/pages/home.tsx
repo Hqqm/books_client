@@ -21,7 +21,9 @@ export const HomePage = () => {
       <br />
       <Link to="/myBooks">go to my books</Link>
       <br />
-      {isAdmin(currentUser) && <Link to="/authorsPanel">go to author panel</Link>}
+      {isAdmin(currentUser) && (
+        <Link to="/authorsPanel">go to author panel</Link>
+      )}
     </div>
   );
 };

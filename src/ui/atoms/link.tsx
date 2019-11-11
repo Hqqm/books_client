@@ -7,3 +7,9 @@ export const AuthLink = styled(Link)`
   margin-top: 10px;
   text-decoration: none;
 `;
+
+export const NavBarLink = styled(Link)`
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+`;

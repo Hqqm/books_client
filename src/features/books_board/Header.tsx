@@ -3,25 +3,30 @@ import styled from "styled-components";
 import { useStore } from "effector-react";
 
 import { history } from "@lib/history";
-import { $session, $isAuthenticated, dropSession } from "@features/shared/session";
+import { $session, dropSession } from "@features/shared/session";
 import { UserData } from "@api/account";
-import { Button } from "@ui/atoms";
+import { Button, NavBarLink } from "@ui/atoms";
 
 import { createEvent } from "effector";
+import { isAdmin } from "@lib/isAdmin";
 
 export const Header = () => {
   const currentUser = useStore($session);
-  const isAuthentication = useStore($isAuthenticated);
-  console.log(currentUser);
 
   return (
     <Nav>
+      <UserName>{showUser(currentUser)}</UserName>
       <Ul>
-        <Item>isAuthentication : {isAuthentication ? "true" : "false"} </Item>
-        <Item>current user : {showUser(currentUser)}</Item>
-        <Item>Управление</Item>
         <Item>
-          <Button onClick={logout}>Выход</Button>{" "}
+          <NavBarLink to="/myBooks">Мои книги</NavBarLink>
+        </Item>
+        <Item>
+          {isAdmin(currentUser) && (
+            <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+          )}
+        </Item>
+        <Item>
+          <NavButton onClick={logout}>Выход</NavButton>{" "}
         </Item>
       </Ul>
     </Nav>
@@ -40,16 +45,43 @@ const showUser = (user: UserData | null) =>
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 100%;
 `;
 
 const Item = styled.li`
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
   list-style: none;
-  margin-right: 25px;
+
+  padding: 17px 10px;
+  & {
+    :hover {
+      background: #305c71;
+    }
+  }
 `;
 
 const Ul = styled.ul`
   display: flex;
   align-items: center;
+  margin-right: 25px;
+`;
+
+const UserName = styled.div`
+  display: flex;
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 17px 10px;
+  margin-left: 25px;
+`;
+
+const NavButton = styled.button`
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  background: transparent;
+  border: none;
 `;

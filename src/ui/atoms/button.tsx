@@ -6,9 +6,9 @@ interface Props {
 
 export const Button = styled.button<Props>`
   width: 100%;
-  padding: 10px;
+  padding: 13px;
   border-radius: 10px;
-  background: #a75aff;
+  background: #4d7689;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -36,19 +36,19 @@ export const Button = styled.button<Props>`
   }
 `;
 
-export const TableButton = styled(Button)`
-  margin: 5px;
-  padding: 5px;
-`;
+type TableProps = {
+  backColor: string;
+};
 
-export const AddButton = styled(Button)`
+export const TableButton = styled(Button)<TableProps>`
   margin: 5px;
-  padding: 5px;
-  background: #5dd042;
-`;
-
-export const DeleteButton = styled(Button)`
-  margin: 5px;
-  padding: 5px;
-  background: #da3535;
+  padding: 10px;
+  border: 1px solid;
+  color: #fff;
+  background: ${({ backColor }) => backColor};
+  & {
+    :hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
 `;

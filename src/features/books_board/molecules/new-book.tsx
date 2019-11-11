@@ -13,16 +13,24 @@ import {
   nameChanged,
   $bookPrice,
   $bookPriceError,
-  priceChanged
+  priceChanged,
+  $isBookFormSubmitEnabled
 } from "../model/add-book";
+import styled from "styled-components";
 
 export const NewBookForm = () => {
+  const enabled = useStore($isBookFormSubmitEnabled);
+
   return (
     <Form onSubmit={newBookFormSubmited} title="Создание книги">
       <AuthorIdField />
       <BookNameField />
       <BookPriceField />
-      <Button type="submit">Добавить новую книгу</Button>
+      <ButtonCointaer>
+        <Button type="submit" disabled={!enabled}>
+          Добавить новую книгу
+        </Button>
+      </ButtonCointaer>
     </Form>
   );
 };
@@ -80,3 +88,8 @@ const BookPriceField = () => {
     />
   );
 };
+
+const ButtonCointaer = styled.div`
+  width: 100%;
+  margin-top: 20px;
+`;
