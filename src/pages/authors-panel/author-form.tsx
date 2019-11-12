@@ -16,7 +16,7 @@ import {
   countryChanged,
   authorFormSubmitted,
   $isAuthorFormSubmitEnabled
-} from "./model/create-author";
+} from "./model/author";
 
 export const AuthorForm = () => {
   const submitEnabled = useStore($isAuthorFormSubmitEnabled);
@@ -90,5 +90,5 @@ const AuthorCountryField = () => {
 
 const ButtonContainer = styled.div`
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
 `;

@@ -13,7 +13,12 @@ export type BookProps = {
   price: string;
 };
 
-export const createBook = async ({ author_id, name, price }: BookProps) => {
+export type TakeBooksProps = {
+  book_id: number;
+  amount: number;
+};
+
+export const efCreateBook = async ({ author_id, name, price }: BookProps) => {
   const response = await fetch("/api/books", {
     method: "POST",
     body: JSON.stringify({
@@ -32,7 +37,7 @@ export const createBook = async ({ author_id, name, price }: BookProps) => {
   return book;
 };
 
-export const removeBookHandler = async (id: number) => {
+export const efRemoveBook = async (id: number) => {
   await fetch(`/api/books/${id}`, {
     method: "DELETE",
     headers: {
@@ -41,7 +46,7 @@ export const removeBookHandler = async (id: number) => {
   });
 };
 
-export const fetchBooks = async () => {
+export const efFetchBooks = async () => {
   const response = await fetch("/api/books", {
     method: "GET",
     headers: {
@@ -50,4 +55,18 @@ export const fetchBooks = async () => {
   });
 
   return response.json();
+};
+
+export const efTakeBook = async ({ book_id, amount }: TakeBooksProps) => {
+  await fetch("/api/takeBook", {
+    method: "POST",
+    body: JSON.stringify({
+      book_id,
+      amount
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": $token.getState() || ""
+    }
+  });
 };

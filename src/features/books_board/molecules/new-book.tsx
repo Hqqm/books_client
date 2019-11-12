@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 import { useStore } from "effector-react";
 import { Button, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
@@ -15,8 +16,7 @@ import {
   $bookPriceError,
   priceChanged,
   $isBookFormSubmitEnabled
-} from "../model/add-book";
-import styled from "styled-components";
+} from "../model";
 
 export const NewBookForm = () => {
   const enabled = useStore($isBookFormSubmitEnabled);

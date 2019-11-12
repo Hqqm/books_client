@@ -1,5 +1,5 @@
 import { HomePage } from "./home";
-import { AdminBooksPage } from "./books";
+import { PanelBooksPage } from "./books";
 import { LoginPage } from "./login";
 import { RegisterPage } from "./register";
 import { BookPage } from "./book/book";
@@ -11,7 +11,7 @@ export const routes = () => [
   { path: "/register", exact: true, component: RegisterPage },
   { path: "/myBooks", exact: true, component: UserBooksPage },
   { path: "/authorsPanel", exact: true, component: AuthorsPage },
-  { path: "/books", exact: true, component: AdminBooksPage },
+  { path: "/books", exact: true, component: PanelBooksPage },
   { path: "/books/:id", exact: true, component: BookPage },
   { path: "/auth", exact: true, component: LoginPage }
 ];

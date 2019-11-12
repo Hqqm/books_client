@@ -1,13 +1,13 @@
 import * as React from "react";
 import { MainTemplate } from "@ui/templates/main-template";
-import { Header } from "@features/books_board/Header";
-import { ListOfBooks } from "@features/books_board/ListOfBooks";
-import { pageListOfBooksReady } from "@features/books_board/model/fetch-books";
+import { Header } from "@features/shared/header";
+import { TableOfBooks } from "@features/books_board/books-table";
+import { pageTableOfBooksReady } from "@features/books_board/model";
 
-export const AdminBooksPage = () => {
+export const PanelBooksPage = () => {
   React.useEffect(() => {
-    pageListOfBooksReady();
+    pageTableOfBooksReady();
   }, []);
 
-  return <MainTemplate header={<Header />} main={<ListOfBooks />} />;
+  return <MainTemplate header={<Header />} main={<TableOfBooks />} />;
 };

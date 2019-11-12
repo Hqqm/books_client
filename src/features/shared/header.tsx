@@ -5,7 +5,7 @@ import { useStore } from "effector-react";
 import { history } from "@lib/history";
 import { $session, dropSession } from "@features/shared/session";
 import { UserData } from "@api/account";
-import { Button, NavBarLink } from "@ui/atoms";
+import { NavBarLink } from "@ui/atoms";
 
 import { createEvent } from "effector";
 import { isAdmin } from "@lib/isAdmin";
@@ -14,22 +14,17 @@ export const Header = () => {
   const currentUser = useStore($session);
 
   return (
-    <Nav>
+    <HeaderContainer>
       <UserName>{showUser(currentUser)}</UserName>
-      <Ul>
-        <Item>
-          <NavBarLink to="/myBooks">Мои книги</NavBarLink>
-        </Item>
-        <Item>
-          {isAdmin(currentUser) && (
-            <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
-          )}
-        </Item>
-        <Item>
-          <NavButton onClick={logout}>Выход</NavButton>{" "}
-        </Item>
-      </Ul>
-    </Nav>
+      <Navigation>
+        <NavBarLink to="/myBooks">Мои книги</NavBarLink>
+        <NavBarLink to="/books">Все книги</NavBarLink>
+        {isAdmin(currentUser) && (
+          <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+        )}
+        <NavButton onClick={logout}>Выход</NavButton>
+      </Navigation>
+    </HeaderContainer>
   );
 };
 
@@ -43,27 +38,13 @@ logout.watch(() => {
 const showUser = (user: UserData | null) =>
   user !== null ? user.last_name + " " + user.first_name : "guest";
 
-const Nav = styled.nav`
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   height: 100%;
 `;
 
-const Item = styled.li`
-  color: #fff;
-  font-weight: bold;
-  font-size: 14px;
-  list-style: none;
-
-  padding: 17px 10px;
-  & {
-    :hover {
-      background: #305c71;
-    }
-  }
-`;
-
-const Ul = styled.ul`
+const Navigation = styled.nav`
   display: flex;
   align-items: center;
   margin-right: 25px;
@@ -84,4 +65,11 @@ const NavButton = styled.button`
   font-size: 14px;
   background: transparent;
   border: none;
+  padding: 17px 10px;
+  cursor: pointer;
+  & {
+    :hover {
+      background: #305c71;
+    }
+  }
 `;
