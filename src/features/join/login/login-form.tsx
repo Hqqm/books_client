@@ -14,7 +14,7 @@ import {
   $isSubmitEnabled,
   $formError
 } from "./model/login";
-import { Button, AuthLink, Input } from "@ui/atoms";
+import { Button, Link, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 
 export const LoginForm = () => {
@@ -31,7 +31,7 @@ export const LoginForm = () => {
           Войти
         </Button>
       </Container>
-      <AuthLink to="/register">Перейти к регистрации &#8658;</AuthLink>
+      <Link to="/register">Перейти к регистрации &#8658;</Link>
     </Form>
   );
 };

@@ -79,7 +79,10 @@ removeBook.use(efRemoveBook);
 takeBook.use(efTakeBook);
 
 $allBooks
-  .on(loadBooks.done, (_, { result }) => result)
+  .on(loadBooks.done, (_, { result }) => {
+    console.log(result);
+    return result;
+  })
   .on(addBook.done, (state, { result }) => [...state, result])
   .on(removeBook.done, (state, { params }) =>
     state.filter(book => book.id !== params)

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
 
-import { Button, AuthLink, Input } from "@ui/atoms";
+import { Button, Link, Input } from "@ui/atoms";
 import { Form } from "@ui/molecules/form";
 import {
   formSubmitted,
@@ -21,10 +21,13 @@ import {
   $passwordError,
   $firstNameError,
   $lastNameError,
-  $passwordConfirmationError
+  $passwordConfirmationError,
+  $isRegisterSubmitedEnabled
 } from "./model/register";
 
 export const RegisterForm = () => {
+  const isSubmitEnabled = useStore($isRegisterSubmitedEnabled);
+
   return (
     <Form onSubmit={formSubmitted} title="Регистрация">
       <Email />
@@ -33,9 +36,11 @@ export const RegisterForm = () => {
       <LastName />
       <PasswordConfirmation />
       <Container>
-        <Button type="submit">Зарегистрироваться</Button>
+        <Button disabled={!isSubmitEnabled} type="submit">
+          Зарегистрироваться
+        </Button>
       </Container>
-      <AuthLink to="/auth">Перейти к входу &#8658;</AuthLink>
+      <Link to="/auth">Перейти к входу &#8658;</Link>
     </Form>
   );
 };

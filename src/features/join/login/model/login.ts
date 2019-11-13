@@ -4,7 +4,8 @@ import {
   createStore,
   createEvent,
   createStoreObject,
-  combine
+  combine,
+  clearNode
 } from "effector";
 
 import { FormData, createSessionHandler } from "@api/session";

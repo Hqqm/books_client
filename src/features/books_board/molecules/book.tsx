@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Book as BookType } from "@api/books";
+import { Text } from "@ui/atoms";
 
 type Props = {
   author: string;
@@ -11,9 +12,15 @@ type Props = {
 export const Book: React.FC<Props> = ({ author, name, price }) => {
   return (
     <>
-      <div> {author}</div>
-      <div>название: {name}</div>
-      <div>цена: {price}</div>
+      <Text size="20px" color="#000">
+        название книги: {name}
+      </Text>
+      <Text size="15px" color="#000">
+        ФИО автора: {author}
+      </Text>
+      <Text size="15px" color="#000">
+        цена: {price} рублей
+      </Text>
     </>
   );
 };

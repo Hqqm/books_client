@@ -2,4 +2,4 @@ export { Button, TableButton } from "./button";
 export { Input } from "./input";
 export { Spiner } from "./spiner";
 export { Text } from "./text";
-export { AuthLink, NavBarLink } from "./link";
+export { Link, NavBarLink } from "./link";

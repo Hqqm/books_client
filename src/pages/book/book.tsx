@@ -4,7 +4,9 @@ import { Book } from "@features/books_board/molecules/book";
 import { useStore } from "effector-react";
 import { currentBook, fetchBookById } from "./model";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link } from "@ui/atoms";
+import { MainTemplate } from "@ui/templates/main-template";
+import { Header } from "@features/shared/header";
 
 export const BookPage = () => {
   let { id } = useParams();
@@ -14,7 +16,7 @@ export const BookPage = () => {
     }
   }, []);
 
-  return <CurrentBook />;
+  return <MainTemplate header={<Header />} main={<CurrentBook />} />;
 };
 
 const CurrentBook = () => {
@@ -26,7 +28,9 @@ const CurrentBook = () => {
   return (
     <Container>
       <Book author={author_name} name={name} price={price} />
-      <Link to="/books">вернутся к книгам</Link>
+      <ButtonContainer>
+        <Link to="/books">вернутся к книгам</Link>
+      </ButtonContainer>
     </Container>
   );
 };
@@ -39,4 +43,10 @@ const Container = styled.div`
   height: 500px;
   width: 400px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+`;
+
+const ButtonContainer = styled.div`
+  height: 30px;
+  display: flex;
+  justify-content: center;
 `;

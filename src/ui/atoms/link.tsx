@@ -1,14 +1,20 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
-export const AuthLink = styled(Link)`
+export const Link = styled(RouterLink)`
   color: #000;
   align-self: flex-end;
   margin-top: 10px;
   text-decoration: none;
+  font-size: 14px;
+  & {
+    :hover {
+      color: #40768e;
+    }
+  }
 `;
 
-export const NavBarLink = styled(Link)`
+export const NavBarLink = styled(RouterLink)`
   color: #fff;
   padding: 17px 10px;
   font-size: 14px;
