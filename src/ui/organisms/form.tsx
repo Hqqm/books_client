@@ -12,7 +12,7 @@ export const Form: React.FC<FormProps> = ({ onSubmit, title, children }) => {
   return (
     <form onSubmit={onSubmit}>
       <FormContainer>
-        <Text color="#40768e" size="30px">
+        <Text color="#01258e" size="30px">
           {title}
         </Text>
         {children}

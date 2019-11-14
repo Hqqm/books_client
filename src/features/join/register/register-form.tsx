@@ -2,8 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
 
-import { Button, Link, Input } from "@ui/atoms";
-import { Form } from "@ui/molecules/form";
+import { Button, Link } from "@ui/atoms";
+import { Input } from "@ui/molecules";
+import { Form } from "@ui/organisms/form";
 import {
   formSubmitted,
   $email,

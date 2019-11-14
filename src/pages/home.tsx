@@ -24,6 +24,8 @@ export const HomePage = () => {
       {isAdmin(currentUser) && (
         <Link to="/authorsPanel">go to author panel</Link>
       )}
+      <br />
+      <Link to="/users">go to users</Link>
     </div>
   );
 };

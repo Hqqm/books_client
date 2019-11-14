@@ -14,8 +14,9 @@ import {
   $isSubmitEnabled,
   $formError
 } from "./model/login";
-import { Button, Link, Input } from "@ui/atoms";
-import { Form } from "@ui/molecules/form";
+import { Button, Link } from "@ui/atoms";
+import { Input } from "@ui/molecules";
+import { Form } from "@ui/organisms/form";
 
 export const LoginForm = () => {
   const submitDisabled = useStore($isSubmitEnabled);

@@ -48,7 +48,7 @@ const StyledInput = styled.input<Props>`
   height: 40px;
   padding-left: 10px;
   border-radius: 5px;
-  border: 1px solid #5fa6c5;
+  border: 1px solid #01258e;
   font-size: 1.3rem;
   &:disabled {
     background-color: #d2d2d2;

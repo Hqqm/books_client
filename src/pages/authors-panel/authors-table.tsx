@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useList } from "effector-react";
-import { TableButton } from "@ui/atoms";
+import { DeleteButton } from "@ui/atoms";
 import { deleteAuthor, $allAuthors } from "./model/author";
 
 export type Author = {
@@ -24,12 +24,9 @@ export const TableOfAuthors = () => {
       <AuthorItem {...author} />
       <th>
         <ButtonWrapper>
-          <TableButton
-            onClick={() => deleteAuthor(author.id)}
-            backColor="#da3535"
-          >
+          <DeleteButton onClick={() => deleteAuthor(author.id)}>
             Удалить
-          </TableButton>
+          </DeleteButton>
         </ButtonWrapper>
       </th>
     </tr>

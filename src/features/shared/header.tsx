@@ -20,7 +20,10 @@ export const Header = () => {
         <NavBarLink to="/myBooks">Мои книги</NavBarLink>
         <NavBarLink to="/books">Все книги</NavBarLink>
         {isAdmin(currentUser) && (
-          <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+          <>
+            <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+            <NavBarLink to="/users">Управление пользователями</NavBarLink>
+          </>
         )}
         <NavButton onClick={logout}>Выход</NavButton>
       </Navigation>

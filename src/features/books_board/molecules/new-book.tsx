@@ -1,8 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
-import { Button, Input } from "@ui/atoms";
-import { Form } from "@ui/molecules/form";
+import { Button } from "@ui/atoms";
+import { Input } from "@ui/molecules";
+import { Form } from "@ui/organisms/form";
 import {
   newBookFormSubmited,
   $authorId,

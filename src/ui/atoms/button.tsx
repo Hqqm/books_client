@@ -8,7 +8,7 @@ export const Button = styled.button<Props>`
   width: 100%;
   padding: 13px;
   border-radius: 10px;
-  background: #4d7689;
+  background: #01258e;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -40,15 +40,41 @@ type TableProps = {
   backColor: string;
 };
 
-export const TableButton = styled(Button)<TableProps>`
+export const InfoButton = styled.button`
   margin: 5px;
   padding: 10px;
   border: 1px solid;
-  color: #fff;
-  background: ${({ backColor }) => backColor};
+  border-radius: 10px;
+  color: #01258e;
+  background: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
   & {
     :hover {
-      background: rgba(0, 0, 0, 0.5);
+      background: #01258e;
+      color: #fff;
+    }
+  }
+`;
+
+export const DeleteButton = styled(InfoButton)`
+  color: #da3535;
+  background: #fff;
+  & {
+    :hover {
+      background: #da3535;
+      color: #fff;
+    }
+  }
+`;
+
+export const PrimaryButton = styled(InfoButton)`
+  color: #418037;
+  background: #fff;
+  & {
+    :hover {
+      background: #418037;
+      color: #fff;
     }
   }
 `;

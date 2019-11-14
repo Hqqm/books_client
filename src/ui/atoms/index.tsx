@@ -1,5 +1,4 @@
-export { Button, TableButton } from "./button";
-export { Input } from "./input";
+export { Button, InfoButton, DeleteButton, PrimaryButton } from "./button";
 export { Spiner } from "./spiner";
 export { Text } from "./text";
 export { Link, NavBarLink } from "./link";
