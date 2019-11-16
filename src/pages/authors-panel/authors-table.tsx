@@ -2,7 +2,11 @@ import * as React from "react";
 import styled from "styled-components";
 import { useList } from "effector-react";
 import { DeleteButton } from "@ui/atoms";
-import { deleteAuthor, $allAuthors } from "./model/author";
+import {
+  deleteAuthor,
+  $allAuthors,
+  authorConfirmModalOpened
+} from "./model/author";
 
 export type Author = {
   id: number;
@@ -24,7 +28,7 @@ export const TableOfAuthors = () => {
       <AuthorItem {...author} />
       <th>
         <ButtonWrapper>
-          <DeleteButton onClick={() => deleteAuthor(author.id)}>
+          <DeleteButton onClick={() => authorConfirmModalOpened(author.id)}>
             Удалить
           </DeleteButton>
         </ButtonWrapper>

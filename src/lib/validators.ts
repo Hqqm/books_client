@@ -16,14 +16,17 @@ export const textValidator = (value: string) => {
   return null;
 };
 
-export const passwordConfirmation = (confirmPassword: string, password: string) => {
+export const passwordConfirmation = (
+  confirmPassword: string,
+  password: string
+) => {
   if (confirmPassword === password) {
     return null;
   }
   return "Пароли не совпадают";
 };
 
-const numberOnly = /^[1-9]+$/i;
+const numberOnly = /^[0-9]+$/i;
 export const numberOnlyValidator = (value: string) => {
   if (!numberOnly.test(value)) return "Поле должно содержать только цифры";
   return null;

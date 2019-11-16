@@ -149,3 +149,39 @@ authorFormSubmitted.watch(e => e.preventDefault());
 authorsPageMounted.watch(() => {
   fetchAllAuthors();
 });
+
+export const authorConfirmModalOpened = createEvent<number>(
+  "author confirm modal opened"
+);
+
+export const authorConfirmModalClosed = createEvent(
+  "author confirm modal closed"
+);
+
+export const $authorIdConfirmModal = createStore<number | null>(null);
+
+export const $authorConfirmModal = createStore<boolean>(false);
+
+$authorIdConfirmModal.on(authorConfirmModalOpened, (_, payload) => payload);
+
+$authorConfirmModal
+  .on(authorConfirmModalOpened, (_, __) => true)
+  .on(authorConfirmModalClosed, (_, __) => false);
+
+deleteAuthor.done.watch(() => {
+  authorConfirmModalClosed();
+});
+
+authorConfirmModalOpened.watch(() => {
+  let root = document.getElementById("root");
+  if (root) {
+    root.style.opacity = "0.3";
+  }
+});
+
+authorConfirmModalClosed.watch(() => {
+  let root = document.getElementById("root");
+  if (root) {
+    root.style.opacity = "1";
+  }
+});

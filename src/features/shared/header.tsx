@@ -72,7 +72,7 @@ const NavButton = styled.button`
   cursor: pointer;
   & {
     :hover {
-      background: #305c71;
+      text-decoration: underline;
     }
   }
 `;

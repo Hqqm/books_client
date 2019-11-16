@@ -22,10 +22,12 @@ export const HomePage = () => {
       <Link to="/myBooks">go to my books</Link>
       <br />
       {isAdmin(currentUser) && (
-        <Link to="/authorsPanel">go to author panel</Link>
+        <>
+          <Link to="/authorsPanel">go to author panel</Link>
+          <br />
+          <Link to="/users">go to users</Link>
+        </>
       )}
-      <br />
-      <Link to="/users">go to users</Link>
     </div>
   );
 };

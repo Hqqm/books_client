@@ -28,7 +28,9 @@ const UsersTable = () => {
   const users = useList($users, user => (
     <tr>
       <UserInfo {...user} />
-      <DeleteButton onClick={() => deleteUser(user.id)}>Удалить</DeleteButton>
+      <th>
+        <DeleteButton onClick={() => deleteUser(user.id)}>Удалить</DeleteButton>
+      </th>
     </tr>
   ));
 
