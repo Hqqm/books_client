@@ -1,24 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useList } from "effector-react";
-import { DeleteButton } from "@ui/atoms";
-import {
-  deleteAuthor,
-  $allAuthors,
-  authorConfirmModalOpened
-} from "./model/author";
-
-export type Author = {
-  id: number;
-  fio: string;
-  date_of_birth: string;
-  country: string;
-};
-
-type Props = {
-  headItems: string[];
-  bodyItems: React.ReactNode;
-};
+import { DeleteButton, Th } from "@ui/atoms";
+import { $allAuthors, authorConfirmModalOpened } from "./model/author";
 
 export const TableOfAuthors = () => {
   const headItems = ["id", "ФИО", "Дата рождения", "Страна"];
@@ -39,6 +23,13 @@ export const TableOfAuthors = () => {
   return <Table headItems={headItems} bodyItems={authors} />;
 };
 
+export type Author = {
+  id: number;
+  fio: string;
+  date_of_birth: string;
+  country: string;
+};
+
 const AuthorItem = (author: Author) => (
   <>
     <Th>{author.id}</Th>
@@ -47,6 +38,11 @@ const AuthorItem = (author: Author) => (
     <Th>{author.country}</Th>
   </>
 );
+
+type Props = {
+  headItems: string[];
+  bodyItems: React.ReactNode;
+};
 
 export const Table = ({ headItems, bodyItems }: Props) => (
   <TableView>
@@ -65,13 +61,6 @@ const TableView = styled.table`
   border-radius: 10px;
   border-spacing: 0;
   text-align: center;
-`;
-
-const Th = styled.th`
-  background: #fff;
-  color: black;
-  padding: 10px 20px;
-  font-weight: 500;
 `;
 
 const ButtonWrapper = styled.div`

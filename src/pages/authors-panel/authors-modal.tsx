@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Modal } from "@ui/molecules/modal";
-import { PrimaryButton, DeleteButton } from "@ui/atoms";
+import styled from "styled-components";
 import { useStore } from "effector-react";
+import { PrimaryButton, DeleteButton, H2 } from "@ui/atoms";
+import { Modal } from "@ui/molecules/modal";
 import {
   $authorConfirmModal,
   authorConfirmModalClosed,
   $authorIdConfirmModal,
   deleteAuthor
 } from "pages/authors-panel/model/author";
-import styled from "styled-components";
 
 export const AuthorModal = () => {
   const isModalOpen = useStore($authorConfirmModal);
@@ -38,11 +38,4 @@ export const AuthorModal = () => {
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-const H2 = styled.div`
-  color: #fff;
-  margin: 10px;
-  font-size: 14px;
-  font-weight: 600;
 `;

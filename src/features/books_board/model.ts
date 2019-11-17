@@ -21,9 +21,12 @@ export const pageTableOfBooksReady = createEvent();
 export const newBookFormSubmited = createEvent<
   React.FormEvent<HTMLFormElement>
 >();
-export const idChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
-  "bookd id changed"
-);
+export const authorIdChanged = createEvent<
+  React.SyntheticEvent<HTMLInputElement>
+>("author id changed");
+export const genreIdChanged = createEvent<
+  React.SyntheticEvent<HTMLInputElement>
+>("genre id changed");
 export const nameChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
   "bookd name changed"
 );
@@ -44,6 +47,12 @@ export const $isAuthorIdCorrect = $authorIdError.map<boolean>(
   value => value === null
 );
 
+export const $genreId = createStore<string>("").reset(addBook.done);
+export const $genreIdError = $genreId.map<string | null>(numberOnlyValidator);
+export const $isGenreIdCorrect = $genreIdError.map<boolean>(
+  value => value === null
+);
+
 export const $bookName = createStore<string>("").reset(addBook.done);
 export const $bookNameError = $bookName.map<string | null>(textValidator);
 export const $isBookNameCorrect = $bookNameError.map<boolean>(
@@ -61,8 +70,12 @@ export const $isBookPriceCorrect = $bookPriceError.map<boolean>(
 export const $allBooks = createStore<Book[]>([]);
 
 $authorId.on(
-  idChanged.map(e => e.currentTarget.value),
-  (_, id) => id
+  authorIdChanged.map(e => e.currentTarget.value),
+  (_, authorId) => authorId
+);
+$genreId.on(
+  genreIdChanged.map(e => e.currentTarget.value),
+  (_, genreId) => genreId
 );
 $bookName.on(
   nameChanged.map(e => e.currentTarget.value),
@@ -90,6 +103,7 @@ $allBooks
 
 export const $BookForm = createStoreObject({
   author_id: $authorId,
+  genre_id: $genreId,
   name: $bookName,
   price: $bookPrice
 });
@@ -104,10 +118,19 @@ export const $isBookFormDisabled = addBook.pending;
 
 const $isBookFormValid = combine(
   $isAuthorIdCorrect,
+  $isGenreIdCorrect,
   $isBookNameCorrect,
   $isBookPriceCorrect,
-  (isAuthorIdCorrect, isBookNameCorrect, isBookPriceCorrect) =>
-    isAuthorIdCorrect && isBookNameCorrect && isBookPriceCorrect
+  (
+    isAuthorIdCorrect,
+    isGenreIdCorrect,
+    isBookNameCorrect,
+    isBookPriceCorrect
+  ) =>
+    isAuthorIdCorrect &&
+    isGenreIdCorrect &&
+    isBookNameCorrect &&
+    isBookPriceCorrect
 );
 
 export const $isBookFormSubmitEnabled = combine(

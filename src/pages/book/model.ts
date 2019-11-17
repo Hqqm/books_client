@@ -9,7 +9,7 @@ type BookWithAuthor = {
 };
 
 const initialState: BookWithAuthor = {
-  book: { id: 0, author_id: 0, name: "", price: 0 },
+  book: { id: 0, author_id: 0, genre_id: 0, name: "", price: 0 },
   author_name: ""
 };
 

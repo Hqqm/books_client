@@ -3,12 +3,14 @@ import { $token } from "@features/shared/token";
 export type Book = {
   id: number;
   author_id: number;
+  genre_id: number;
   name: string;
   price: number;
 };
 
 export type BookProps = {
   author_id: string;
+  genre_id: string;
   name: string;
   price: string;
 };
@@ -18,11 +20,17 @@ export type TakeBooksProps = {
   amount: number;
 };
 
-export const efCreateBook = async ({ author_id, name, price }: BookProps) => {
+export const efCreateBook = async ({
+  author_id,
+  name,
+  price,
+  genre_id
+}: BookProps) => {
   const response = await fetch("/api/books", {
     method: "POST",
     body: JSON.stringify({
       author_id: parseInt(author_id),
+      genre_id: parseInt(genre_id),
       name,
       price: parseInt(price)
     }),

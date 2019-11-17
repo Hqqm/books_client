@@ -17,17 +17,20 @@ export const HomePage = () => {
           <Link to="register">go to register</Link>
         </div>
       )}
-      <Link to="/books">go to books panel</Link>
-      <br />
-      <Link to="/myBooks">go to my books</Link>
-      <br />
+
       {isAdmin(currentUser) && (
         <>
           <Link to="/authorsPanel">go to author panel</Link>
           <br />
           <Link to="/users">go to users</Link>
+          <br />
+          <Link to="/genres">go to genre</Link>
         </>
       )}
+      <br />
+      <Link to="/books">go to books panel</Link>
+      <br />
+      <Link to="/myBooks">go to my books</Link>
     </div>
   );
 };

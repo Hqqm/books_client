@@ -8,7 +8,7 @@ import {
   newBookFormSubmited,
   $authorId,
   $authorIdError,
-  idChanged,
+  authorIdChanged,
   $isBookFormDisabled,
   $bookName,
   $bookNameError,
@@ -16,7 +16,10 @@ import {
   $bookPrice,
   $bookPriceError,
   priceChanged,
-  $isBookFormSubmitEnabled
+  $isBookFormSubmitEnabled,
+  $genreId,
+  $genreIdError,
+  genreIdChanged
 } from "../model";
 
 export const NewBookForm = () => {
@@ -25,6 +28,7 @@ export const NewBookForm = () => {
   return (
     <Form onSubmit={newBookFormSubmited} title="Создание книги">
       <AuthorIdField />
+      <GenreIdField />
       <BookNameField />
       <BookPriceField />
       <ButtonCointaer>
@@ -37,19 +41,37 @@ export const NewBookForm = () => {
 };
 
 const AuthorIdField = () => {
-  const author_id = useStore($authorId);
-  const fioError = useStore($authorIdError);
-  const isFioCorrect = useStore($isBookFormDisabled);
+  const authorId = useStore($authorId);
+  const authorIdError = useStore($authorIdError);
+  const isAuthorIdCorrect = useStore($isBookFormDisabled);
 
   return (
     <Input
-      value={author_id}
-      onChange={idChanged}
-      error={author_id && fioError}
+      value={authorId}
+      onChange={authorIdChanged}
+      error={authorId && authorIdError}
       label=" Id автора"
       name="author_id"
       autoComplete="true"
-      disabled={isFioCorrect}
+      disabled={isAuthorIdCorrect}
+    />
+  );
+};
+
+const GenreIdField = () => {
+  const genreId = useStore($genreId);
+  const genreIdError = useStore($genreIdError);
+  const isGenreIdCorrect = useStore($isBookFormDisabled);
+
+  return (
+    <Input
+      value={genreId}
+      onChange={genreIdChanged}
+      error={genreId && genreIdError}
+      label=" Id жанра"
+      name="genre_id"
+      autoComplete="true"
+      disabled={isGenreIdCorrect}
     />
   );
 };

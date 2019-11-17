@@ -30,6 +30,7 @@ export const BookItem = (book: BookType) => {
     <>
       <Th>{book.id}</Th>
       <Th>{book.author_id}</Th>
+      <Th>{book.genre_id}</Th>
       <Th>{book.name}</Th>
       <Th>{book.price}</Th>
     </>

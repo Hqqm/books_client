@@ -28,7 +28,8 @@ const ModalWrapper = styled.div`
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 200px;
+  max-width: 425px;
+  min-height: 200px;
   background: #01258e;
   padding: 20px;
   justify-content: center;

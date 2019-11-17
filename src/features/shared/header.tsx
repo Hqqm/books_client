@@ -22,6 +22,7 @@ export const Header = () => {
         {isAdmin(currentUser) && (
           <>
             <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+            <NavBarLink to="/genres">Панель жанров</NavBarLink>
             <NavBarLink to="/users">Управление пользователями</NavBarLink>
           </>
         )}

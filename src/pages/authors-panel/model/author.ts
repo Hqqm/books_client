@@ -18,23 +18,29 @@ type AuthorProps = {
 export const fioChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
   "author fio changed"
 );
+
 export const dateOfBirthChanged = createEvent<
   React.SyntheticEvent<HTMLInputElement>
 >("author date of birth changed");
+
 export const countryChanged = createEvent<
   React.SyntheticEvent<HTMLInputElement>
 >("author country changed");
+
 export const authorFormSubmitted = createEvent<
   React.FormEvent<HTMLFormElement>
 >("author form submitted");
+
 export const authorsPageMounted = createEvent("author page mounted");
 
 export const deleteAuthor = createEffect<number, void, Error>(
   "author deleting"
 );
+
 export const createAuthor = createEffect<AuthorProps, Author, Error>(
   "create author"
 );
+
 export const fetchAllAuthors = createEffect<void, Author[], Error>(
   "fetching all authors"
 );

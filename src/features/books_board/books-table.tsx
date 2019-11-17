@@ -12,9 +12,16 @@ import { Table } from "pages/authors-panel/authors-table";
 import { BookItem } from "@features/books_board/molecules/book";
 import { $allBooks, removeBook, takeBook } from "./model";
 
+const tableHeaderItems = [
+  "id книги",
+  "id автора",
+  "id genre",
+  "Название книги",
+  "Цена"
+];
+
 export const TableOfBooks = () => {
   const currentUser = useStore($session);
-  const tableHeaderItems = ["id книги", "id автора", "Название книги", "Цена"];
 
   const books = useList($allBooks, book => (
     <tr>

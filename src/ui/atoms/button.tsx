@@ -50,6 +50,7 @@ export const InfoButton = styled.button`
   background: #fff;
   font-weight: 600;
   font-size: 1.1rem;
+  cursor: pointer;
   & {
     :hover {
       background: #01258e;
