@@ -28,7 +28,10 @@ export const genreFormSubmitted = createEvent<React.FormEvent<HTMLFormElement>>(
 export const genresPageMounted = createEvent("genres page mounted");
 
 export const getGenres = createEffect<void, Genre[], Error>("fetching genres");
-export const createGenre = createEffect<NewGenre, Genre, Error>("create genre");
+export const deleteGenre = createEffect<number, void, Error>("deleting genre");
+export const createGenre = createEffect<NewGenre, Genre, Error>(
+  "creating genre"
+);
 
 export const $genreName = createStore<string>("");
 export const $genreNameError = $genreName.map<string | null>(textValidator);
@@ -62,6 +65,16 @@ getGenres.use(async () => {
   return response.json();
 });
 
+deleteGenre.use(async id => {
+  await fetch(`/api/genres/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": $token.getState() || ""
+    }
+  });
+});
+
 createGenre.use(async newGenreData => {
   const response = await fetch("/api/genres", {
     method: "POST",
@@ -77,6 +90,9 @@ createGenre.use(async newGenreData => {
 
 $allGenres
   .on(getGenres.done, (_, { result }) => result)
+  .on(deleteGenre.done, (state, { params }) =>
+    state.filter(genre => genre.id !== params)
+  )
   .on(createGenre.done, (state, { result }) => [...state, result]);
 
 $genreName

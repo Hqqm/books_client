@@ -8,14 +8,15 @@ import { loadMore } from "pages/book/model";
 import { $session } from "@features/shared/session";
 import { isAdmin } from "@lib/isAdmin";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
-import { Table } from "pages/authors-panel/authors-table";
+
 import { BookItem } from "@features/books_board/molecules/book";
 import { $allBooks, removeBook, takeBook } from "./model";
+import { Table } from "@ui/organisms/table";
 
 const tableHeaderItems = [
   "id книги",
   "id автора",
-  "id genre",
+  "id жанра",
   "Название книги",
   "Цена"
 ];

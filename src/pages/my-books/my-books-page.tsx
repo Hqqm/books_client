@@ -8,7 +8,7 @@ import { loadMore } from "pages/book/model";
 import { Header } from "@features/shared/header";
 import { MainTemplate } from "@ui/templates/main-template";
 
-export const UserBooksPage = () => {
+export const MyBooksPage = () => {
   React.useEffect(() => {
     userBooksPageMounted();
   }, []);

@@ -1,32 +1,46 @@
 import * as React from "react";
 import styled from "styled-components";
+import { createEvent } from "effector";
 import { useStore } from "effector-react";
-
 import { history } from "@lib/history";
-import { $session, dropSession } from "@features/shared/session";
+import { isAdmin } from "@lib/isAdmin";
 import { UserData } from "@api/account";
 import { NavBarLink } from "@ui/atoms";
-
-import { createEvent } from "effector";
-import { isAdmin } from "@lib/isAdmin";
+import {
+  $session,
+  dropSession,
+  $isAuthenticated
+} from "@features/shared/session";
 
 export const Header = () => {
   const currentUser = useStore($session);
+  const isAuthenticated = useStore($isAuthenticated);
 
   return (
     <HeaderContainer>
-      <UserName>{showUser(currentUser)}</UserName>
+      <UserName>
+        <NavBarLink to="/">{showUser(currentUser)}</NavBarLink>
+      </UserName>
       <Navigation>
-        <NavBarLink to="/myBooks">Мои книги</NavBarLink>
         <NavBarLink to="/books">Все книги</NavBarLink>
         {isAdmin(currentUser) && (
           <>
-            <NavBarLink to="/authorsPanel">Панель авторов</NavBarLink>
+            <NavBarLink to="/authors">Панель авторов</NavBarLink>
             <NavBarLink to="/genres">Панель жанров</NavBarLink>
             <NavBarLink to="/users">Управление пользователями</NavBarLink>
           </>
         )}
-        <NavButton onClick={logout}>Выход</NavButton>
+        {isAuthenticated ? (
+          <React.Fragment>
+            <NavBarLink to="/myBooks">Мои книги</NavBarLink>
+            <NavButton onClick={logout}>Выход</NavButton>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <NavBarLink to="/login">Войти</NavBarLink>
+            <NavBarLink to="/register">Зарегистрироваться</NavBarLink>
+          </React.Fragment>
+        )}
       </Navigation>
     </HeaderContainer>
   );

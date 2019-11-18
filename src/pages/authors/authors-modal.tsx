@@ -8,7 +8,7 @@ import {
   authorConfirmModalClosed,
   $authorIdConfirmModal,
   deleteAuthor
-} from "pages/authors-panel/model/author";
+} from "pages/authors/model/author";
 
 export const AuthorModal = () => {
   const isModalOpen = useStore($authorConfirmModal);

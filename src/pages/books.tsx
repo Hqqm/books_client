@@ -4,7 +4,7 @@ import { Header } from "@features/shared/header";
 import { TableOfBooks } from "@features/books_board/books-table";
 import { pageTableOfBooksReady } from "@features/books_board/model";
 
-export const PanelBooksPage = () => {
+export const BooksPage = () => {
   React.useEffect(() => {
     pageTableOfBooksReady();
   }, []);

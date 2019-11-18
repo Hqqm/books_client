@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 import { useStore } from "effector-react";
 import { Button } from "@ui/atoms";
 import { Input } from "@ui/molecules";
@@ -17,9 +18,11 @@ export const GenreForm = () => {
   return (
     <Form onSubmit={genreFormSubmitted} title="Создание жанра">
       <GenreNameField />
-      <Button type="submit" disabled={!submitEnabled}>
-        создать автора
-      </Button>
+      <ButtonContainer>
+        <Button type="submit" disabled={!submitEnabled}>
+          создать жанр
+        </Button>
+      </ButtonContainer>
     </Form>
   );
 };
@@ -41,3 +44,8 @@ const GenreNameField = () => {
     />
   );
 };
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  margin-top: 20px;
+`;

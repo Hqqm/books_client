@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useList } from "effector-react";
 import { DeleteButton, Th } from "@ui/atoms";
-import { Table } from "pages/authors-panel/authors-table";
-import { Genre, $allGenres } from "./model";
+import { Table } from "@ui/organisms/table";
+import { Genre, $allGenres, deleteGenre } from "./model";
 
 const headItems = ["id", "Название жанра"];
 
@@ -11,7 +11,9 @@ export const TableOfGenres = () => {
     <tr>
       <GenreItem {...genre} />
       <th>
-        <DeleteButton onClick={() => console.log("paw")}>Удалить</DeleteButton>
+        <DeleteButton onClick={() => deleteGenre(genre.id)}>
+          Удалить
+        </DeleteButton>
       </th>
     </tr>
   ));

@@ -1,11 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useList, useStore } from "effector-react";
-import { $users, User, usersPageMounted, deleteUser } from "./model";
-import { DeleteButton } from "@ui/atoms";
-import { Table } from "pages/authors-panel/authors-table";
+import { useList } from "effector-react";
+
+import { DeleteButton, Th } from "@ui/atoms";
+import { Table } from "@ui/organisms/table";
 import { MainTemplate } from "@ui/templates/main-template";
 import { Header } from "@features/shared/header";
+import { $users, User, usersPageMounted, deleteUser } from "./model";
 
 export const UsersPage = () => {
   React.useEffect(() => {
@@ -15,16 +16,16 @@ export const UsersPage = () => {
   return <MainTemplate header={<Header />} main={<UsersTable />} />;
 };
 
-const UsersTable = () => {
-  const tableHeaderItems = [
-    "id пользователя",
-    "Имя",
-    "Фамилия",
-    "Почта",
-    "Роль",
-    "Дата создания аккаунта"
-  ];
+const tableHeaderItems = [
+  "id пользователя",
+  "Имя",
+  "Фамилия",
+  "Почта",
+  "Роль",
+  "Дата создания аккаунта"
+];
 
+const UsersTable = () => {
   const users = useList($users, user => (
     <tr>
       <UserInfo {...user} />
@@ -53,13 +54,6 @@ const UserInfo = (user: User) => {
     </>
   );
 };
-
-const Th = styled.th`
-  background: #fff;
-  color: black;
-  padding: 10px 20px;
-  font-weight: 500;
-`;
 
 const UsersPageWrapper = styled.div`
   display: flex;

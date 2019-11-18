@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { useList } from "effector-react";
 import { DeleteButton, Th } from "@ui/atoms";
+import { Table } from "@ui/organisms/table";
 import { $allAuthors, authorConfirmModalOpened } from "./model/author";
 
 export const TableOfAuthors = () => {
@@ -38,30 +39,6 @@ const AuthorItem = (author: Author) => (
     <Th>{author.country}</Th>
   </>
 );
-
-type Props = {
-  headItems: string[];
-  bodyItems: React.ReactNode;
-};
-
-export const Table = ({ headItems, bodyItems }: Props) => (
-  <TableView>
-    <thead>
-      <tr>
-        {headItems.map((item: string, index) => (
-          <Th key={index}>{item}</Th>
-        ))}
-      </tr>
-    </thead>
-    <tbody>{bodyItems}</tbody>
-  </TableView>
-);
-
-const TableView = styled.table`
-  border-radius: 10px;
-  border-spacing: 0;
-  text-align: center;
-`;
 
 const ButtonWrapper = styled.div`
   margin: 5px 0;

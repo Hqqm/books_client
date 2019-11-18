@@ -1,7 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Book as BookType } from "@api/books";
-import { Text } from "@ui/atoms";
+import { Text, Th } from "@ui/atoms";
 
 type Props = {
   author: string;
@@ -36,10 +35,3 @@ export const BookItem = (book: BookType) => {
     </>
   );
 };
-
-const Th = styled.th`
-  background: #fff;
-  color: black;
-  padding: 10px 20px;
-  font-weight: 500;
-`;
