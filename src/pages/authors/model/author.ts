@@ -7,7 +7,17 @@ import {
 } from "effector";
 import { textValidator, numberOnlyValidator } from "@lib/validators";
 import { $token } from "@features/shared/token";
-import { Author } from "../authors-table";
+import {
+  confirmModalClosed,
+  confirmModalOpened
+} from "@features/shared/modal/model";
+
+export type Author = {
+  id: number;
+  fio: string;
+  date_of_birth: string;
+  country: string;
+};
 
 type AuthorProps = {
   fio: string;
@@ -66,6 +76,8 @@ export const $authorCountryError = $authorCountry.map<string | null>(
 export const $isAuthorCountryCorrect = $authorCountryError.map<boolean>(
   value => value === null
 );
+
+export const $authorIdConfirmModal = createStore<number | null>(null);
 export const $allAuthors = createStore<Author[]>([]);
 
 $authorFio.on(
@@ -87,6 +99,8 @@ export const $AuthorForm = createStoreObject({
   date_of_birth: $authorDateOfBirth,
   country: $authorCountry
 });
+
+$authorIdConfirmModal.on(confirmModalOpened, (_, payload) => payload);
 
 $allAuthors
   .on(fetchAllAuthors.done, (_, { result }) => result)
@@ -152,42 +166,11 @@ authorFormSubmitted.watch(() => {
 });
 
 authorFormSubmitted.watch(e => e.preventDefault());
+
 authorsPageMounted.watch(() => {
   fetchAllAuthors();
 });
 
-export const authorConfirmModalOpened = createEvent<number>(
-  "author confirm modal opened"
-);
-
-export const authorConfirmModalClosed = createEvent(
-  "author confirm modal closed"
-);
-
-export const $authorIdConfirmModal = createStore<number | null>(null);
-
-export const $authorConfirmModal = createStore<boolean>(false);
-
-$authorIdConfirmModal.on(authorConfirmModalOpened, (_, payload) => payload);
-
-$authorConfirmModal
-  .on(authorConfirmModalOpened, (_, __) => true)
-  .on(authorConfirmModalClosed, (_, __) => false);
-
 deleteAuthor.done.watch(() => {
-  authorConfirmModalClosed();
-});
-
-authorConfirmModalOpened.watch(() => {
-  let root = document.getElementById("root");
-  if (root) {
-    root.style.opacity = "0.3";
-  }
-});
-
-authorConfirmModalClosed.watch(() => {
-  let root = document.getElementById("root");
-  if (root) {
-    root.style.opacity = "1";
-  }
+  confirmModalClosed();
 });

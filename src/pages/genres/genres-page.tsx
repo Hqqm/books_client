@@ -5,6 +5,7 @@ import { GenreForm } from "./genres-form";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
 import { TableOfGenres } from "./genres-table";
 import { genresPageMounted } from "./model";
+import { GenreModal } from "./genres-modal";
 
 export const GenresPage = () => {
   React.useEffect(() => {
@@ -12,11 +13,17 @@ export const GenresPage = () => {
   }, []);
 
   return (
-    <MainTemplate
-      header={<Header />}
-      main={
-        <FormWithTableTemplate form={<GenreForm />} table={<TableOfGenres />} />
-      }
-    />
+    <React.Fragment>
+      <MainTemplate
+        header={<Header />}
+        main={
+          <FormWithTableTemplate
+            form={<GenreForm />}
+            table={<TableOfGenres />}
+          />
+        }
+      />
+      <GenreModal />
+    </React.Fragment>
   );
 };

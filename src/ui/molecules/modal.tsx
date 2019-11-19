@@ -6,7 +6,7 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-export const Modal = ({ children }: ModalProps) =>
+export const ViewModal = ({ children }: ModalProps) =>
   ReactDOM.createPortal(
     <ModalWrapper>
       <ModalContainer>{children}</ModalContainer>

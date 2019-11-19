@@ -8,6 +8,11 @@ import {
 import { textValidator } from "@lib/validators";
 import { $token } from "@features/shared/token";
 
+import {
+  confirmModalClosed,
+  confirmModalOpened
+} from "@features/shared/modal/model";
+
 export type Genre = {
   id: number;
   name: string;
@@ -44,6 +49,8 @@ export const $GenreForm = createStoreObject({
 });
 
 export const $isGenreFormDisabled = createGenre.pending;
+
+export const $genreIdConfirmModal = createStore<number | null>(null);
 
 export const $allGenres = createStore<Genre[]>([]);
 
@@ -102,8 +109,14 @@ $genreName
   )
   .reset(createGenre.done);
 
+$genreIdConfirmModal.on(confirmModalOpened, (_, payload) => payload);
+
 genresPageMounted.watch(() => {
   getGenres();
+});
+
+deleteGenre.done.watch(() => {
+  confirmModalClosed();
 });
 
 export const $isGenreFormSubmitEnabled = combine(

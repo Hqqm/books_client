@@ -1,22 +1,18 @@
 import * as React from "react";
-import styled from "styled-components";
 import { useList } from "effector-react";
 import { DeleteButton, Th } from "@ui/atoms";
 import { Table } from "@ui/organisms/table";
-import { $allAuthors, authorConfirmModalOpened } from "./model/author";
+import { $allAuthors, Author } from "./model/author";
+import { confirmModalOpened } from "@features/shared/modal/model";
 
 export const TableOfAuthors = () => {
-  const headItems = ["id", "ФИО", "Дата рождения", "Страна"];
-
   const authors = useList($allAuthors, author => (
     <tr>
       <AuthorItem {...author} />
       <th>
-        <ButtonWrapper>
-          <DeleteButton onClick={() => authorConfirmModalOpened(author.id)}>
-            Удалить
-          </DeleteButton>
-        </ButtonWrapper>
+        <DeleteButton onClick={() => confirmModalOpened(author.id)}>
+          Удалить
+        </DeleteButton>
       </th>
     </tr>
   ));
@@ -24,12 +20,7 @@ export const TableOfAuthors = () => {
   return <Table headItems={headItems} bodyItems={authors} />;
 };
 
-export type Author = {
-  id: number;
-  fio: string;
-  date_of_birth: string;
-  country: string;
-};
+const headItems = ["id", "ФИО", "Дата рождения", "Страна"];
 
 const AuthorItem = (author: Author) => (
   <>
@@ -39,7 +30,3 @@ const AuthorItem = (author: Author) => (
     <Th>{author.country}</Th>
   </>
 );
-
-const ButtonWrapper = styled.div`
-  margin: 5px 0;
-`;
