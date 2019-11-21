@@ -11,14 +11,14 @@ type Props = {
 export const Book: React.FC<Props> = ({ author, name, price }) => {
   return (
     <>
-      <Text size="20px" color="#000">
-        название книги: {name}
-      </Text>
       <Text size="15px" color="#000">
-        ФИО автора: {author}
+        Название книги: {name}
       </Text>
-      <Text size="15px" color="#000">
-        цена: {price} рублей
+      <Text size="14px" color="#000">
+        Автор: {author}
+      </Text>
+      <Text size="14px" color="#000">
+        Цена: {price} рублей
       </Text>
     </>
   );

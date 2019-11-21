@@ -142,5 +142,5 @@ sample({
 registerUser.use(registerUserHandler);
 registerUser.done.watch(({ result }) => {
   console.log(result);
-  history.push("/auth");
+  history.push("/login");
 });

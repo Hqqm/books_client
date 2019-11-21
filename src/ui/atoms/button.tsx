@@ -36,9 +36,9 @@ export const Button = styled.button<Props>`
   }
 `;
 
-type TableProps = {
-  backColor: string;
-};
+export const BorderlessButton = styled(Button)`
+  border-radius: 0px;
+`;
 
 export const InfoButton = styled.button`
   width: 100%;

@@ -7,7 +7,7 @@ export const emailValidator = (value: string) => {
 
 export const passwordValidator = (value: string) => {
   if (value && value.length > 2) return null;
-  return "пароль должен быть больше 3 символов";
+  return "Пароль должен быть больше 2 символов";
 };
 
 const textRegexp = /^[а-я a-z,.'-]+$/i;
@@ -20,14 +20,16 @@ export const passwordConfirmation = (
   confirmPassword: string,
   password: string
 ) => {
-  if (confirmPassword === password) {
-    return null;
-  }
-  return "Пароли не совпадают";
+  if (confirmPassword && confirmPassword.length < 3)
+    return "Пароль должен быть больше 2 символов";
+  if (confirmPassword !== password) return "Пароли не совпадают";
+
+  return null;
 };
 
 const numberOnly = /^[0-9]+$/i;
 export const numberOnlyValidator = (value: string) => {
   if (!numberOnly.test(value)) return "Поле должно содержать только цифры";
+
   return null;
 };

@@ -28,15 +28,16 @@ const CurrentBook = () => {
   return (
     <Container>
       <Book author={author_name} name={name} price={price} />
-      <ButtonContainer>
-        <Link to="/books">вернутся к книгам</Link>
-      </ButtonContainer>
+      <LinkContainer>
+        <Link to="/books">Вернутся к книгам</Link>
+      </LinkContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
   margin: 30px 20px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -45,7 +46,7 @@ const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
 `;
 
-const ButtonContainer = styled.div`
+const LinkContainer = styled.div`
   height: 30px;
   display: flex;
   justify-content: center;

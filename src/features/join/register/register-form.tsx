@@ -41,7 +41,7 @@ export const RegisterForm = () => {
           Зарегистрироваться
         </Button>
       </Container>
-      <Link to="/auth">Перейти к входу &#8658;</Link>
+      <Link to="/login">Перейти к входу &#8658;</Link>
     </Form>
   );
 };

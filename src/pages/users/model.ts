@@ -1,5 +1,9 @@
 import { createEffect, createStore, createEvent, sample } from "effector";
 import { $token } from "@features/shared/token";
+import {
+  confirmModalOpened,
+  confirmModalClosed
+} from "@features/shared/modal/model";
 
 export type User = {
   id: number;
@@ -19,6 +23,7 @@ export const deleteUser = createEffect<number, void, Error>(
   "deleting user by id"
 );
 
+export const $userIdConfirmModal = createStore<number | null>(null);
 export const $users = createStore<User[]>([]);
 
 fetchUsers.use(async () => {
@@ -47,6 +52,12 @@ $users
     state.filter(user => user.id !== params)
   );
 
+$userIdConfirmModal.on(confirmModalOpened, (_, payload) => payload);
+
 usersPageMounted.watch(() => {
   fetchUsers();
+});
+
+deleteUser.done.watch(() => {
+  confirmModalClosed();
 });

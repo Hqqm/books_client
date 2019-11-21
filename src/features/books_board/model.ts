@@ -133,6 +133,8 @@ const $isBookFormValid = combine(
     isBookPriceCorrect
 );
 
+export const $isBooksLoading = loadBooks.pending;
+
 export const $isBookFormSubmitEnabled = combine(
   $isBookFormValid,
   addBook.pending,

@@ -160,12 +160,11 @@ export const $isAuthorFormSubmitEnabled = combine(
     isAuthorFormValid && !isAuthorCreating
 );
 
-authorFormSubmitted.watch(() => {
+authorFormSubmitted.watch(e => {
+  e.preventDefault();
   const data = $AuthorForm.getState();
   createAuthor(data);
 });
-
-authorFormSubmitted.watch(e => e.preventDefault());
 
 authorsPageMounted.watch(() => {
   fetchAllAuthors();
