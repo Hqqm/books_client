@@ -13,7 +13,9 @@ import {
   efCreateBook,
   efRemoveBook,
   efFetchBooks,
-  efTakeBook
+  efTakeBook,
+  efUpdateBook,
+  UpdateBook
 } from "@api/books";
 import { numberOnlyValidator, textValidator } from "@lib/validators";
 
@@ -28,17 +30,22 @@ export const genreIdChanged = createEvent<
   React.SyntheticEvent<HTMLInputElement>
 >("genre id changed");
 export const nameChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
-  "bookd name changed"
+  "books name changed"
 );
 export const priceChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
-  "bookd prices changed"
+  "books prices changed"
 );
 
+export const bookUpdated = createEvent<number>();
+
 export const loadBooks = createEffect<void, Book[], Error>();
-export const removeBook = createEffect<number, void, Error>("book deleting");
+export const removeBook = createEffect<number, void, Error>("deletingbook");
 export const addBook = createEffect<BookProps, Book, Error>();
 export const takeBook = createEffect<TakeBooksProps, void, Error>(
   "taking book"
+);
+export const updateBook = createEffect<UpdateBook, void, Error>(
+  "updating book"
 );
 
 export const $authorId = createStore<string>("").reset(addBook.done);
@@ -90,6 +97,7 @@ loadBooks.use(efFetchBooks);
 addBook.use(efCreateBook);
 removeBook.use(efRemoveBook);
 takeBook.use(efTakeBook);
+updateBook.use(efUpdateBook);
 
 $allBooks
   .on(loadBooks.done, (_, { result }) => {
@@ -99,7 +107,17 @@ $allBooks
   .on(addBook.done, (state, { result }) => [...state, result])
   .on(removeBook.done, (state, { params }) =>
     state.filter(book => book.id !== params)
-  );
+  )
+  .on(updateBook.done, (state, { params }) => [
+    ...state.filter(book => book.id !== params.id),
+    {
+      id: params.id,
+      author_id: parseInt(params.formData.author_id),
+      genre_id: parseInt(params.formData.genre_id),
+      name: params.formData.name,
+      price: parseInt(params.formData.price)
+    }
+  ]);
 
 export const $BookForm = createStoreObject({
   author_id: $authorId,
@@ -143,6 +161,11 @@ export const $isBookFormSubmitEnabled = combine(
 
 pageTableOfBooksReady.watch(() => {
   loadBooks();
+});
+
+bookUpdated.watch((id: number) => {
+  const formData = $BookForm.getState();
+  updateBook({ formData, id });
 });
 
 newBookFormSubmited.watch(e => {

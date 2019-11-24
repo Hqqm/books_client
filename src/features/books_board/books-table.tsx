@@ -10,7 +10,14 @@ import { isAdmin } from "@lib/isAdmin";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
 
 import { BookItem } from "@features/books_board/molecules/book";
-import { $allBooks, removeBook, takeBook, $isBooksLoading } from "./model";
+import {
+  $allBooks,
+  removeBook,
+  takeBook,
+  $isBooksLoading,
+  $BookForm,
+  bookUpdated
+} from "./model";
 import { Table } from "@ui/organisms/table";
 
 const tableHeaderItems = [
@@ -38,9 +45,14 @@ export const TableOfBooks = () => {
           Взять
         </PrimaryButton>
         {isAdmin(currentUser) && (
-          <DeleteButton onClick={() => removeBook(book.id)}>
-            Удалить
-          </DeleteButton>
+          <React.Fragment>
+            <DeleteButton onClick={() => removeBook(book.id)}>
+              Удалить
+            </DeleteButton>
+            <DeleteButton onClick={() => bookUpdated(book.id)}>
+              Обновить
+            </DeleteButton>
+          </React.Fragment>
         )}
       </ButtonContainer>
     </tr>

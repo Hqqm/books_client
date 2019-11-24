@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
-import { Button } from "@ui/atoms";
+import { Button, InfoButton } from "@ui/atoms";
 import { Input } from "@ui/molecules";
 import { Form } from "@ui/organisms/form";
 import {

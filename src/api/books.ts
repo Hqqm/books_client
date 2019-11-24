@@ -15,6 +15,11 @@ export type BookProps = {
   price: string;
 };
 
+export type UpdateBook = {
+  formData: BookProps;
+  id: number;
+};
+
 export type TakeBooksProps = {
   book_id: number;
   amount: number;
@@ -71,6 +76,22 @@ export const efTakeBook = async ({ book_id, amount }: TakeBooksProps) => {
     body: JSON.stringify({
       book_id,
       amount
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": $token.getState() || ""
+    }
+  });
+};
+
+export const efUpdateBook = async (book: UpdateBook) => {
+  await fetch(`/api/books/${book.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      author_id: parseInt(book.formData.author_id),
+      genre_id: parseInt(book.formData.genre_id),
+      name: book.formData.name,
+      price: parseInt(book.formData.price)
     }),
     headers: {
       "Content-Type": "application/json",
