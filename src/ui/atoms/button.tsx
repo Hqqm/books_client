@@ -44,9 +44,9 @@ export const InfoButton = styled.button`
   width: 100%;
   margin: 5px;
   padding: 10px;
-  border: 1px solid;
+  border: 1px solid #01258e;
   border-radius: 10px;
-  color: #01258e;
+  color: #000;
   background: #fff;
   font-weight: 600;
   font-size: 1.1rem;
@@ -60,7 +60,8 @@ export const InfoButton = styled.button`
 `;
 
 export const DeleteButton = styled(InfoButton)`
-  color: #da3535;
+  color: #000;
+  border: 1px solid #da3535;
   background: #fff;
   & {
     :hover {
@@ -70,8 +71,21 @@ export const DeleteButton = styled(InfoButton)`
   }
 `;
 
+export const UpdateButton = styled(InfoButton)`
+  border: 1px solid #ffa200;
+  color: #000;
+  background: #fff;
+  & {
+    :hover {
+      background: #ffa200;
+      color: #fff;
+    }
+  }
+`;
+
 export const PrimaryButton = styled(InfoButton)`
-  color: #418037;
+  border: 1px solid #418037;
+  color: #000;
   background: #fff;
   & {
     :hover {

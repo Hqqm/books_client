@@ -101,23 +101,25 @@ updateBook.use(efUpdateBook);
 
 $allBooks
   .on(loadBooks.done, (_, { result }) => {
-    console.log(result);
     return result;
   })
   .on(addBook.done, (state, { result }) => [...state, result])
   .on(removeBook.done, (state, { params }) =>
     state.filter(book => book.id !== params)
   )
-  .on(updateBook.done, (state, { params }) => [
-    ...state.filter(book => book.id !== params.id),
-    {
-      id: params.id,
-      author_id: parseInt(params.formData.author_id),
-      genre_id: parseInt(params.formData.genre_id),
-      name: params.formData.name,
-      price: parseInt(params.formData.price)
-    }
-  ]);
+  .on(updateBook.done, (state, { params }) =>
+    state.map(book =>
+      book.id !== params.id
+        ? book
+        : {
+            id: params.id,
+            author_id: parseInt(params.formData.author_id),
+            genre_id: parseInt(params.formData.genre_id),
+            name: params.formData.name,
+            price: parseInt(params.formData.price)
+          }
+    )
+  );
 
 export const $BookForm = createStoreObject({
   author_id: $authorId,

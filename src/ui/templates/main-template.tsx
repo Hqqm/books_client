@@ -16,20 +16,16 @@ export const MainTemplate: React.FC<TemplateProps> = ({ header, main }) => {
 };
 
 const Container = styled.div`
-  display: grid;
+  display: flex;
   height: 100%;
-  grid-template-rows: 50px auto;
-  grid-template-columns: 200px auto;
-  grid-template-areas:
-    "header header header header"
-    "main main main main";
+  flex-direction: column;
 `;
 
 const Header = styled.div`
-  grid-area: header;
+  height: 50px;
   background: #01258e;
 `;
 
 const Main = styled.div`
-  grid-area: main;
+  height: calc(100% - 50px);
 `;

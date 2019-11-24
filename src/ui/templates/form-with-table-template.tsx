@@ -39,7 +39,7 @@ const FixedWrapper = styled.div`
 
 const FormWrapper = styled.div`
   position: fixed;
-  left: 30px;
+  left: 20px;
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
