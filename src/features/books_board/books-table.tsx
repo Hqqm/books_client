@@ -13,7 +13,6 @@ import { loadMore } from "pages/book/model";
 import { $session } from "@features/shared/session";
 import { isAdmin } from "@lib/isAdmin";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
-
 import { BookItem } from "@features/books_board/molecules/book";
 import { $allBooks, removeBook, takeBook, bookUpdated } from "./model";
 import { Table } from "@ui/organisms/table";

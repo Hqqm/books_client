@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useList } from "effector-react";
-import { DeleteButton, Th } from "@ui/atoms";
+import { DeleteButton, Th, UpdateButton } from "@ui/atoms";
 import { Table } from "@ui/organisms/table";
-import { $allAuthors, Author } from "./model/author";
+import { $allAuthors, Author, authorUpdated } from "./model/author";
 import { confirmModalOpened } from "@features/shared/modal/model";
 
 export const TableOfAuthors = () => {
@@ -13,6 +13,9 @@ export const TableOfAuthors = () => {
         <DeleteButton onClick={() => confirmModalOpened(author.id)}>
           Удалить
         </DeleteButton>
+        <UpdateButton onClick={() => authorUpdated(author.id)}>
+          Обновить
+        </UpdateButton>
       </th>
     </tr>
   ));

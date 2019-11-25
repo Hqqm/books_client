@@ -19,6 +19,7 @@ import {
 } from "@api/books";
 import { numberOnlyValidator, textValidator } from "@lib/validators";
 
+export const bookUpdated = createEvent<number>();
 export const pageTableOfBooksReady = createEvent();
 export const newBookFormSubmited = createEvent<
   React.FormEvent<HTMLFormElement>
@@ -35,8 +36,6 @@ export const nameChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
 export const priceChanged = createEvent<React.SyntheticEvent<HTMLInputElement>>(
   "books prices changed"
 );
-
-export const bookUpdated = createEvent<number>();
 
 export const loadBooks = createEffect<void, Book[], Error>();
 export const removeBook = createEffect<number, void, Error>("deletingbook");
