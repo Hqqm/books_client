@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useList } from "effector-react";
 import { DeleteButton, Th, UpdateButton } from "@ui/atoms";
-import { Table } from "@ui/organisms/table";
-import { Genre, $allGenres, genreUpdated } from "./model";
+import { Table } from "@ui/organisms";
 import { confirmModalOpened } from "@features/shared/modal/model";
+import { Genre, $allGenres, genreUpdated } from "./model";
 
 export const TableOfGenres = () => {
   const genres = useList($allGenres, genre => (

@@ -1,5 +1,5 @@
-import { Book } from "@api/books";
 import { createEffect, createStore, createEvent } from "effector";
+import { Book } from "@api/books";
 import { $token } from "@features/shared/token";
 import { history } from "@lib/history";
 

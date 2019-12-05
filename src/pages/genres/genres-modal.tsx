@@ -1,11 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
-import { Modal } from "@features/shared/modal/modal";
 import { H2, PrimaryButton, DeleteButton } from "@ui/atoms";
-import { deleteGenre, $genreIdConfirmModal } from "./model";
-
 import { confirmModalClosed } from "@features/shared/modal/model";
+import { Modal } from "@features/shared/modal/modal";
+import { deleteGenre, $genreIdConfirmModal } from "./model";
 
 export const GenreModal = () => {
   const genreId = useStore($genreIdConfirmModal);

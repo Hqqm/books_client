@@ -28,11 +28,12 @@ export const FormWithTableTemplate = ({ form, table }: FormWithList) => {
 
 const WrapperFormWithTable = styled.div`
   display: flex;
-  height: 100%;
+  min-height: 100vh;
   justify-content: flex-start;
 `;
 
 const FixedWrapper = styled.div`
+  min-height: 100vh;
   width: 500px;
   background: #e2e2e2;
 `;

@@ -1,11 +1,10 @@
 import * as React from "react";
-import { MainTemplate } from "@ui/templates/main-template";
+import { MainTemplate, FormWithTableTemplate } from "@ui/templates";
 import { Header } from "@features/shared/header";
 import { GenreForm } from "./genres-form";
-import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
 import { TableOfGenres } from "./genres-table";
-import { genresPageMounted } from "./model";
 import { GenreModal } from "./genres-modal";
+import { genresPageMounted } from "./model";
 
 export const GenresPage = () => {
   React.useEffect(() => {

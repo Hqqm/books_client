@@ -8,11 +8,10 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
   }
   #root {
-    height: 100%;
+    min-height: 100vh;
   }
   html, body {
     font-family: 'Montserrat', sans-serif;
-    height: 100%;
+    min-height: 100vh
   }
-  
 `;

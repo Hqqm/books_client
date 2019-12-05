@@ -1,12 +1,12 @@
 import * as React from "react";
-import { userBooksPageMounted, $userAllBooks, deleteUserBook } from "./model";
-import { useList } from "effector-react";
 import styled from "styled-components";
-import { Book } from "@features/books_board/molecules/book";
+import { useList } from "effector-react";
 import { BorderlessButton } from "@ui/atoms";
-import { loadMore } from "pages/book/model";
+import { Book } from "@ui/molecules";
+import { MainTemplate } from "@ui/templates";
 import { Header } from "@features/shared/header";
-import { MainTemplate } from "@ui/templates/main-template";
+import { loadMore } from "pages/book/model";
+import { userBooksPageMounted, $userAllBooks, deleteUserBook } from "./model";
 
 export const MyBooksPage = () => {
   React.useEffect(() => {

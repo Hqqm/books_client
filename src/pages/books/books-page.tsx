@@ -1,8 +1,8 @@
 import * as React from "react";
-import { MainTemplate } from "@ui/templates/main-template";
+import { MainTemplate } from "@ui/templates";
 import { Header } from "@features/shared/header";
-import { TableOfBooks } from "@features/books_board/books-table";
-import { pageTableOfBooksReady } from "@features/books_board/model";
+import { TableOfBooks } from "./books-table";
+import { pageTableOfBooksReady } from "./model";
 
 export const BooksPage = () => {
   React.useEffect(() => {

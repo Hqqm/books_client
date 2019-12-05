@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AuthTemplate } from "@ui/templates/auth-template";
+import { AuthTemplate } from "@ui/templates";
 import { LoginForm } from "@features/join/login/login-form";
 import { formMounted, formUnmounted } from "@features/join/login/model/login";
 

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useList } from "effector-react";
 import { DeleteButton, Th, UpdateButton } from "@ui/atoms";
-import { Table } from "@ui/organisms/table";
-import { $allAuthors, Author, authorUpdated } from "./model/author";
+import { Table } from "@ui/organisms";
 import { confirmModalOpened } from "@features/shared/modal/model";
+import { $allAuthors, Author, authorUpdated } from "./model/author";
 
 export const TableOfAuthors = () => {
   const authors = useList($allAuthors, author => (

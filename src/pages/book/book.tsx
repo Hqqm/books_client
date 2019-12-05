@@ -1,12 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Book } from "@features/books_board/molecules/book";
 import { useStore } from "effector-react";
-import { currentBook, fetchBookById } from "./model";
 import { useParams } from "react-router";
 import { Link } from "@ui/atoms";
-import { MainTemplate } from "@ui/templates/main-template";
+import { Book } from "@ui/molecules";
+import { MainTemplate } from "@ui/templates";
 import { Header } from "@features/shared/header";
+import { currentBook, fetchBookById } from "./model";
 
 export const BookPage = () => {
   let { id } = useParams();

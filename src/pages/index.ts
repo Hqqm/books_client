@@ -2,7 +2,7 @@ import { HomePage } from "./home";
 import { AuthorsPage } from "./authors/authors-page";
 import { GenresPage } from "./genres/genres-page";
 import { UsersPage } from "./users/users-page";
-import { BooksPage } from "./books";
+import { BooksPage } from "./books/books-page";
 import { BookPage } from "./book/book";
 import { MyBooksPage } from "./my-books/my-books-page";
 import { LoginPage } from "./login";

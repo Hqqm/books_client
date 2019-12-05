@@ -1,10 +1,9 @@
 import * as React from "react";
-
-import { usersPageMounted } from "./model";
+import { MainTemplate } from "@ui/templates";
+import { Header } from "@features/shared/header";
 import { UserModal } from "./user-modal";
 import { UsersTable } from "./users-table";
-import { MainTemplate } from "@ui/templates/main-template";
-import { Header } from "@features/shared/header";
+import { usersPageMounted } from "./model";
 
 export const UsersPage = () => {
   React.useEffect(() => {

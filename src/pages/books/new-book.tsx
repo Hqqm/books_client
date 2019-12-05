@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useStore } from "effector-react";
-import { Button, InfoButton } from "@ui/atoms";
+import { Button } from "@ui/atoms";
 import { Input } from "@ui/molecules";
-import { Form } from "@ui/organisms/form";
+import { Form } from "@ui/organisms";
 import {
   newBookFormSubmited,
   $authorId,
@@ -20,7 +20,7 @@ import {
   $genreId,
   $genreIdError,
   genreIdChanged
-} from "../model";
+} from "./model";
 
 export const NewBookForm = () => {
   const enabled = useStore($isBookFormSubmitEnabled);

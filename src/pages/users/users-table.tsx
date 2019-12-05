@@ -1,11 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-
 import { useList } from "effector-react";
-import { $users, User } from "./model";
 import { DeleteButton, Th } from "@ui/atoms";
+import { Table } from "@ui/organisms";
 import { confirmModalOpened } from "@features/shared/modal/model";
-import { Table } from "@ui/organisms/table";
+import { $users, User } from "./model";
 
 export const UsersTable = () => {
   const users = useList($users, user => (

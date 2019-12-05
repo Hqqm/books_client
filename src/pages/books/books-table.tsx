@@ -1,19 +1,19 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useList, useStore } from "effector-react";
-
 import {
   PrimaryButton,
   DeleteButton,
   InfoButton,
   UpdateButton
 } from "@ui/atoms";
-import { NewBookForm } from "./molecules/new-book";
-import { loadMore } from "pages/book/model";
+import { BookItem } from "@ui/molecules";
+import { Table } from "@ui/organisms";
+import { FormWithTableTemplate } from "@ui/templates";
 import { $session } from "@features/shared/session";
+import { NewBookForm } from "./new-book";
+import { loadMore } from "pages/book/model";
 import { isAdmin } from "@lib/isAdmin";
-import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
-import { BookItem } from "@features/books_board/molecules/book";
 import {
   $allBooks,
   removeBook,
@@ -21,11 +21,10 @@ import {
   bookUpdated,
   $isBookFormDisabled
 } from "./model";
-import { Table } from "@ui/organisms/table";
 
 export const TableOfBooks = () => {
   const currentUser = useStore($session);
-  const isUpdateButtonEnabled = useStore($isBookFormDisabled);
+  const isUpdateButtonDisabled = useStore($isBookFormDisabled);
 
   const books = useList($allBooks, book => (
     <tr>
@@ -45,7 +44,7 @@ export const TableOfBooks = () => {
               Обновить
             </UpdateButton>
             <DeleteButton
-              disabled={isUpdateButtonEnabled}
+              disabled={isUpdateButtonDisabled}
               onClick={() => removeBook(book.id)}
             >
               Удалить
