@@ -160,6 +160,23 @@ export const $isBookFormSubmitEnabled = combine(
   (isBookFormValid, isBookTaking) => isBookFormValid && !isBookTaking
 );
 
+export const $isUpdateButtonsEnabled = combine(
+  $isAuthorIdCorrect,
+  $isGenreIdCorrect,
+  $isBookNameCorrect,
+  $isBookPriceCorrect,
+  (
+    isAuthorIdCorrect,
+    isGenreIdCorrect,
+    isBookNameCorrect,
+    isBookPriceCorrect
+  ) =>
+    isAuthorIdCorrect ||
+    isGenreIdCorrect ||
+    isBookNameCorrect ||
+    isBookPriceCorrect
+);
+
 pageTableOfBooksReady.watch(() => {
   loadBooks();
 });

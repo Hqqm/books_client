@@ -28,7 +28,6 @@ export const getCurrentAccount = async () => {
 };
 
 export const registerUserHandler = async (data: RegisterUser) => {
-  console.log(JSON.stringify(data));
   const response = await fetch("/api/register", {
     method: "POST",
     body: JSON.stringify(data),

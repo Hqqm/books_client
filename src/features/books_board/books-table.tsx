@@ -14,11 +14,18 @@ import { $session } from "@features/shared/session";
 import { isAdmin } from "@lib/isAdmin";
 import { FormWithTableTemplate } from "@ui/templates/form-with-table-template";
 import { BookItem } from "@features/books_board/molecules/book";
-import { $allBooks, removeBook, takeBook, bookUpdated } from "./model";
+import {
+  $allBooks,
+  removeBook,
+  takeBook,
+  bookUpdated,
+  $isBookFormDisabled
+} from "./model";
 import { Table } from "@ui/organisms/table";
 
 export const TableOfBooks = () => {
   const currentUser = useStore($session);
+  const isUpdateButtonEnabled = useStore($isBookFormDisabled);
 
   const books = useList($allBooks, book => (
     <tr>
@@ -37,7 +44,10 @@ export const TableOfBooks = () => {
             <UpdateButton onClick={() => bookUpdated(book.id)}>
               Обновить
             </UpdateButton>
-            <DeleteButton onClick={() => removeBook(book.id)}>
+            <DeleteButton
+              disabled={isUpdateButtonEnabled}
+              onClick={() => removeBook(book.id)}
+            >
               Удалить
             </DeleteButton>
           </>

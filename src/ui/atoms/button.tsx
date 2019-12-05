@@ -57,6 +57,19 @@ export const InfoButton = styled.button`
       color: #fff;
     }
   }
+
+  &:disabled,
+  &:disabled:hover,
+  &:disabled:focus,
+  &:disabled:active {
+    background-color: #d2d2d2;
+    border-color: #d2d2d2;
+    color: white;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 export const DeleteButton = styled(InfoButton)`

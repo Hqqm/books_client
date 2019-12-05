@@ -22,6 +22,11 @@ type NewGenre = {
   name: string;
 };
 
+type UpdateGenre = {
+  id: number;
+  formData: NewGenre;
+};
+
 export const genreNameChanged = createEvent<
   React.SyntheticEvent<HTMLInputElement>
 >("genre name  changed");
@@ -29,13 +34,16 @@ export const genreNameChanged = createEvent<
 export const genreFormSubmitted = createEvent<React.FormEvent<HTMLFormElement>>(
   "genre form submitted"
 );
-
+export const genreUpdated = createEvent<number>();
 export const genresPageMounted = createEvent("genres page mounted");
 
 export const getGenres = createEffect<void, Genre[], Error>("fetching genres");
 export const deleteGenre = createEffect<number, void, Error>("deleting genre");
 export const createGenre = createEffect<NewGenre, Genre, Error>(
   "creating genre"
+);
+export const updateGenre = createEffect<UpdateGenre, void, Error>(
+  "updating author"
 );
 
 export const $genreName = createStore<string>("");
@@ -95,12 +103,35 @@ createGenre.use(async newGenreData => {
   return response.json();
 });
 
+updateGenre.use(async (genre: UpdateGenre) => {
+  await fetch(`/api/genres/${genre.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      name: genre.formData.name
+    }),
+    headers: {
+      "Content-Type": "application/json",
+      "x-csrf-token": $token.getState() || ""
+    }
+  });
+});
+
 $allGenres
   .on(getGenres.done, (_, { result }) => result)
   .on(deleteGenre.done, (state, { params }) =>
     state.filter(genre => genre.id !== params)
   )
-  .on(createGenre.done, (state, { result }) => [...state, result]);
+  .on(createGenre.done, (state, { result }) => [...state, result])
+  .on(updateGenre.done, (state, { params }) =>
+    state.map(genre =>
+      genre.id !== params.id
+        ? genre
+        : {
+            id: params.id,
+            name: params.formData.name
+          }
+    )
+  );
 
 $genreName
   .on(
@@ -117,6 +148,11 @@ genresPageMounted.watch(() => {
 
 deleteGenre.done.watch(() => {
   confirmModalClosed();
+});
+
+genreUpdated.watch((id: number) => {
+  const formData = $GenreForm.getState();
+  updateGenre({ id, formData });
 });
 
 export const $isGenreFormSubmitEnabled = combine(
