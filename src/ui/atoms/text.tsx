@@ -12,7 +12,7 @@ export const Text = styled.div<Props>`
 `;
 
 export const H2 = styled.div`
-  color: #fff;
+  color: ${({ color }) => color || "#fff"};
   margin: 10px;
   font-size: 18px;
   font-weight: 600;
