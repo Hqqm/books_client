@@ -3,18 +3,20 @@ import styled from "styled-components";
 
 type Props = {
   form: React.ReactNode;
+  image: React.ReactNode;
 };
 
-export const AuthTemplate: React.FC<Props> = ({ form }) => (
-  <Wrapper>{form && <FormContainer>{form}</FormContainer>}</Wrapper>
+export const AuthTemplate: React.FC<Props> = ({ form, image }) => (
+  <Wrapper>
+    {image && <ImageContainer>{image}</ImageContainer>}
+    {form && <FormContainer>{form}</FormContainer>}
+  </Wrapper>
 );
-
-//{image && <ImageContainer>{image}</ImageContainer>}
 
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   align-items: center;
   justify-content: space-around;
 `;
@@ -26,5 +28,17 @@ const FormContainer = styled.div`
   border-radius: 15px;
   @media (max-width: 500px) {
     box-shadow: none;
+  }
+`;
+
+const ImageContainer = styled.div`
+  min-height: calc(100vh - 50px);
+  width: 550px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 1000px) {
+    display: none;
   }
 `;

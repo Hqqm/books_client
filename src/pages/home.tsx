@@ -10,9 +10,8 @@ export const HomePage = () => (
     main={
       <Container>
         <div>
-          <img src={background} alt="people in library" />
+          <img src={background} alt="peoples in library" />
         </div>
-
         <TextContainer>
           <H2 color={"#01258e"}>Добро пожаловать в библиотеку</H2>
         </TextContainer>

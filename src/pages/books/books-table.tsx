@@ -10,7 +10,7 @@ import {
 import { BookItem } from "@ui/molecules";
 import { Table } from "@ui/organisms";
 import { FormWithTableTemplate } from "@ui/templates";
-import { $session } from "@features/shared/session";
+import { $session, $isAuthenticated } from "@features/shared/session";
 import { NewBookForm } from "./new-book";
 import { loadMore } from "pages/book/model";
 import { isAdmin } from "@lib/isAdmin";
@@ -24,7 +24,9 @@ import {
 
 export const TableOfBooks = () => {
   const currentUser = useStore($session);
+  const isAuthenticated = useStore($isAuthenticated);
   const isUpdateButtonDisabled = useStore($isBookFormDisabled);
+  const isbooksTableEmpty = $allBooks.getState().length > 0;
 
   const books = useList($allBooks, book => (
     <tr>
@@ -33,11 +35,15 @@ export const TableOfBooks = () => {
         <InfoButton onClick={() => loadMore(book.id.toString())}>
           Подробнее
         </InfoButton>
-        <PrimaryButton
-          onClick={() => takeBook({ book_id: book.id, amount: 1 })}
-        >
-          Взять
-        </PrimaryButton>
+
+        {isAuthenticated && (
+          <PrimaryButton
+            onClick={() => takeBook({ book_id: book.id, amount: 1 })}
+          >
+            Взять
+          </PrimaryButton>
+        )}
+
         {isAdmin(currentUser) && (
           <>
             <UpdateButton onClick={() => bookUpdated(book.id)}>
@@ -58,7 +64,13 @@ export const TableOfBooks = () => {
   return (
     <FormWithTableTemplate
       form={<NewBookForm />}
-      table={<Table headItems={tableHeaderItems} bodyItems={books} />}
+      table={
+        isbooksTableEmpty ? (
+          <Table headItems={tableHeaderItems} bodyItems={books} />
+        ) : (
+          "В данный момент книг нет"
+        )
+      }
     />
   );
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
-import { AuthTemplate } from "@ui/templates";
+import { AuthTemplate, MainTemplate } from "@ui/templates";
 import { RegisterForm } from "@features/join/register/register-form";
+import { Header } from "@features/shared/header";
 import {
   formMounted,
   formUnmounted
@@ -14,5 +15,17 @@ export const RegisterPage = () => {
     };
   }, []);
 
-  return <AuthTemplate form={<RegisterForm />} />;
+  return (
+    <MainTemplate
+      header={<Header />}
+      main={
+        <AuthTemplate
+          form={<RegisterForm />}
+          image={<img src={registerImage} alt="woman reading a book" />}
+        />
+      }
+    />
+  );
 };
+
+const registerImage = require("../public/auth.png");

@@ -54,7 +54,7 @@ logout.watch(() => {
 });
 
 const showUser = (user: UserData | null) =>
-  user !== null ? user.last_name + " " + user.first_name : "guest";
+  user !== null ? user.last_name + " " + user.first_name : "Гость";
 
 const HeaderContainer = styled.header`
   display: flex;
